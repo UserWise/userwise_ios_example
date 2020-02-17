@@ -1,0 +1,11 @@
+framework module UserWiseSDK {
+  umbrella header "UserWiseSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module UserWiseSDK.Swift {
+    header "UserWiseSDK-Swift.h"
+    requires objc
+}
