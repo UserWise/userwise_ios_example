@@ -1,4 +1,4 @@
-# UserWise iOS SDK
+# UserWise iOS SDK Example
 UserWise iOS SDK v1.0.0
 
 ## v1.0.0
