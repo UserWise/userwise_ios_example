@@ -1,28 +1,22 @@
-# TheoremReach iOS-SDK
+# UserWise iOS SDK
+UserWise iOS SDK v1.0.0
 
-TheoremReach iOS SDK v3.3.6
+For additional information, please see the [UserWise iOS SDK Integration (fill me in!)](https://userwise.io/docs/ios).
 
-For additional information, please see the [TheoremReach iOS SDK Integration](https://theoremreach.com/docs/ios).
-
-## v3.3.6
-- Fixing iPad bug for iOS 13
+## v1.0.0
+- Initial Release (tentative)
 
 #### Cocoapods:
-
 Add the following to your `podfile`
 
   ```groovy
-  pod 'TheoremReach', ‘3.3.6’
+  pod 'UserWise', ‘1.0.0’
   ```
 
-  #### Manual:
-
-  Download the latest version of the [TheoremReach iOS SDK](https://github.com/theoremreach/iOSSDK) and add the **TheoremReachSDK.framework** to your project. Follow the integration guide to setup your application to use TheoremReach.
+#### Manual:
+Download the latest version of the [UserWise iOS SDK](https://github.com/userwise/userwise_ios_example) and add the **UserWiseSDK.framework** to your project. Follow the integration guide to setup your application to use UserWise.
 
 ## Other platforms:
-
-[TheoremReach Android SDK Integration](https://theoremreach.com/docs/android)
-
-[TheoremReach Unity SDK Integration](https://theoremreach.com/docs/unity)
-
-[TheoremReach Javascript Web SDK Integration](https://theoremreach.com/docs/web)  
+[UserWise Android SDK Integration](https://theoremreach.com/docs/android)
+[UserWise Unity SDK Integration](https://theoremreach.com/docs/unity)
+[UserWise Javascript Web SDK Integration](https://theoremreach.com/docs/web)  
