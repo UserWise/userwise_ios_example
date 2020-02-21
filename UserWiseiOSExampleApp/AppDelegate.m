@@ -22,7 +22,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // The appuser will be initialized once we've received both your API Key
     // and user id.
-    [self.userWise setApiKey:@"d28fea54eb83795868d198d52734"];
+    [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
     [self.userWise setUserId:@"user123"];
     NSLog(@"API Key and User ID Set");
 

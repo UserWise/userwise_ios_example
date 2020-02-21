@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		khWLjypyL36mTCasPixsU8rHsWY=
+		3VlIPf4cPm8CSTkRb0ToGaZ8SzM=
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		khWLjypyL36mTCasPixsU8rHsWY=
+		3VlIPf4cPm8CSTkRb0ToGaZ8SzM=
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		pGt76rfPE97VOvvALPudoZ7ur9w=
+		lbbGQNYMJ/4Z6wWeqWyd3xnea+U=
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		pGt76rfPE97VOvvALPudoZ7ur9w=
+		lbbGQNYMJ/4Z6wWeqWyd3xnea+U=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -92,11 +92,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			khWLjypyL36mTCasPixsU8rHsWY=
+			3VlIPf4cPm8CSTkRb0ToGaZ8SzM=
 			</data>
 			<key>hash2</key>
 			<data>
-			VLFefFxa+v5jbiFADXBji/ESRiCUlEnIjVpC7A8Yuh8=
+			iTkiIJZF9Ca4OTbdFD1CdXBGuVJZRPQjyxPfq0VAxYU=
 			</data>
 		</dict>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftdoc</key>
@@ -114,11 +114,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			khWLjypyL36mTCasPixsU8rHsWY=
+			3VlIPf4cPm8CSTkRb0ToGaZ8SzM=
 			</data>
 			<key>hash2</key>
 			<data>
-			VLFefFxa+v5jbiFADXBji/ESRiCUlEnIjVpC7A8Yuh8=
+			iTkiIJZF9Ca4OTbdFD1CdXBGuVJZRPQjyxPfq0VAxYU=
 			</data>
 		</dict>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -136,11 +136,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pGt76rfPE97VOvvALPudoZ7ur9w=
+			lbbGQNYMJ/4Z6wWeqWyd3xnea+U=
 			</data>
 			<key>hash2</key>
 			<data>
-			5c2NFnpRIS6sywoQ3XXWiL+fDslwGsLU42C7fsX78+4=
+			i4I+19U06Cxf1qOz5IaWMEKXNA0os5gFb84xq86kYSs=
 			</data>
 		</dict>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftdoc</key>
@@ -158,11 +158,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			pGt76rfPE97VOvvALPudoZ7ur9w=
+			lbbGQNYMJ/4Z6wWeqWyd3xnea+U=
 			</data>
 			<key>hash2</key>
 			<data>
-			5c2NFnpRIS6sywoQ3XXWiL+fDslwGsLU42C7fsX78+4=
+			i4I+19U06Cxf1qOz5IaWMEKXNA0os5gFb84xq86kYSs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
