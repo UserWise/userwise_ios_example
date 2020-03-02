@@ -227,7 +227,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _
 
 SWIFT_PROTOCOL_NAMED("UserWiseSurveyDelegate")
 @protocol UserWiseSurveyDelegate
-- (void)onSurveysAvailable;
+- (void)onSurveyAvailable;
+- (void)onSurveysUnavailable;
 - (void)onSurveyEntered;
 - (void)onSurveyEnterFailed;
 - (void)onSurveyClosed;
@@ -467,7 +468,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _
 
 SWIFT_PROTOCOL_NAMED("UserWiseSurveyDelegate")
 @protocol UserWiseSurveyDelegate
-- (void)onSurveysAvailable;
+- (void)onSurveyAvailable;
+- (void)onSurveysUnavailable;
 - (void)onSurveyEntered;
 - (void)onSurveyEnterFailed;
 - (void)onSurveyClosed;

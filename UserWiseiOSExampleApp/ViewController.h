@@ -7,8 +7,9 @@
 #import <UIKit/UIKit.h>
 #import <UserWiseSDK/UserWiseSDK-Swift.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UserWiseSurveyDelegate>
 
+@property (strong, nonatomic) UserWise *userWise;
 
 @end
 
