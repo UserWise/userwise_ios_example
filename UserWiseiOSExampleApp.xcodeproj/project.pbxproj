@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180F0B3D240DD1E600585676 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 180F0B3C240DD1E600585676 /* UIView+Toast.m */; };
 		18183E5B23F308C000173F4F /* UserWiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18183E5623F21F3C00173F4F /* UserWiseSDK.framework */; };
 		18183E5C23F308C000173F4F /* UserWiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18183E5623F21F3C00173F4F /* UserWiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
@@ -41,6 +42,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		180F0B3B240DD1C400585676 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		180F0B3C240DD1E600585676 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		18183E5623F21F3C00173F4F /* UserWiseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserWiseSDK.framework; sourceTree = "<group>"; };
 		7239634E20273F7300702509 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		7239635020273F7300702509 /* UserWiseiOSExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UserWiseiOSExampleApp.entitlements; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 				724E77F21EF14C6500271C2F /* LaunchScreen.storyboard */,
 				724E77F51EF14C6500271C2F /* Info.plist */,
 				724E77E41EF14C6500271C2F /* Supporting Files */,
+				180F0B3B240DD1C400585676 /* UIView+Toast.h */,
+				180F0B3C240DD1E600585676 /* UIView+Toast.m */,
 			);
 			path = UserWiseiOSExampleApp;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180F0B3D240DD1E600585676 /* UIView+Toast.m in Sources */,
 				724E77EC1EF14C6500271C2F /* ViewController.m in Sources */,
 				724E77E91EF14C6500271C2F /* AppDelegate.m in Sources */,
 				724E77E61EF14C6500271C2F /* main.m in Sources */,

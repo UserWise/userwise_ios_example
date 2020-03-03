@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -16,36 +16,47 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Rz2-pD-hHf">
-                                <rect key="frame" x="112.5" y="318" width="144" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BuB-Sl-fjF">
+                                <rect key="frame" x="44" y="209" width="232" height="150"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="A9K-zg-zZX">
-                                        <rect key="frame" x="0.0" y="0.0" width="144" height="50"/>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gBi-bH-GbC">
+                                        <rect key="frame" x="0.0" y="0.0" width="232" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Take Surveys!">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="takeNextSurvey:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iZv-AT-rVU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7Nc-ax-Q1O">
+                                        <rect key="frame" x="0.0" y="120" width="232" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Forcefully Refresh Surveys"/>
+                                        <connections>
+                                            <action selector="forceRefreshHasSurveysAvailable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="huP-Mr-SBm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="MOU-7y-eEl"/>
+                                    <constraint firstAttribute="height" constant="150" id="X3p-z1-Xoo"/>
+                                </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBi-bH-GbC">
-                                <rect key="frame" x="140" y="318.5" width="95" height="30"/>
-                                <state key="normal" title="Take Surveys!"/>
-                                <connections>
-                                    <action selector="launchSurvey:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iZv-AT-rVU"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gBi-bH-GbC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W3S-AR-y16"/>
-                            <constraint firstItem="gBi-bH-GbC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bFC-wl-l3B"/>
+                            <constraint firstItem="BuB-Sl-fjF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VRd-Al-mt3"/>
+                            <constraint firstItem="BuB-Sl-fjF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zi1-eM-tfq"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="130"/>
+            <point key="canvasLocation" x="136.875" y="129.92957746478874"/>
         </scene>
     </scenes>
 </document>

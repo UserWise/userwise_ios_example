@@ -19,12 +19,12 @@
     
     [self.userWise setDebugMode:YES];
     [self.userWise setSurveyDelegate:self];
-    NSLog(@"UserWise Delegate Set");
+    NSLog(@"UserWise Survey Delegate Set");
 
     // The appuser will be initialized once we've received both your API Key
     // and user id.
     [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
-    [self.userWise setUserId:@"user123"];
+    [self.userWise setUserId:@"userwise-ios-example"];
     NSLog(@"API Key and User ID Set");
 }
 
@@ -33,16 +33,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)launchSurvey:(id)sender {
-    UserWise* userWise = [UserWise sharedInstance];
-    
-    NSLog(@"Attempting to launch surveys manually");
-    NSLog(@"Has surveys? %s", [userWise hasSurveysAvailable] ? "Yes" : "No");
-    if ([userWise hasSurveysAvailable]) { // Access a cached version of available surveys
-        [userWise takeNextSurvey];
-    } else {
-        // You can forcefully refresh using: [userWise refreshHasAvailableSurveys];
+- (IBAction)forceRefreshHasSurveysAvailable:(id)sender {
+    [self.userWise refreshHasAvailableSurveys];
+}
+
+- (IBAction)takeNextSurvey:(id)sender {
+    if ([self.userWise hasSurveysAvailable]) {
+        [self.userWise takeNextSurvey];
+        return;
     }
+    
+    [self showTemporaryMessage:@"Cannot take survey. No surveys to take!"];
 }
 
 -(void)onSurveyEntered {
@@ -65,12 +66,14 @@
     [self showTemporaryMessage:@"Survey was successfully completed!"];
 }
 
+- (void)onSurveyEnterFailed {
+    [self showTemporaryMessage:@"Survey failed to load!"];
+}
+
 -(void)showTemporaryMessage:(NSString *)message {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NULL
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    [self presentViewController:alert animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self.view makeToast:message duration:3.0 position:CSToastPositionBottom];
+    });
 }
 
 @end
