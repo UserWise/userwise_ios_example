@@ -209,13 +209,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
-@property (nonatomic, readonly) BOOL hasSurveysAvailable;
 @property (nonatomic) BOOL debugMode;
 @property (nonatomic, strong) id <UserWiseSurveyDelegate> _Nullable surveyDelegate;
 @property (nonatomic, copy) NSString * _Nullable apiKey;
 @property (nonatomic, copy) NSString * _Nullable userId;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
+- (void)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId;
+- (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)hasSurveysAvailable SWIFT_WARN_UNUSED_RESULT;
 - (void)refreshHasAvailableSurveys;
 - (void)takeNextSurvey;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -450,13 +452,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
-@property (nonatomic, readonly) BOOL hasSurveysAvailable;
 @property (nonatomic) BOOL debugMode;
 @property (nonatomic, strong) id <UserWiseSurveyDelegate> _Nullable surveyDelegate;
 @property (nonatomic, copy) NSString * _Nullable apiKey;
 @property (nonatomic, copy) NSString * _Nullable userId;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
+- (void)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId;
+- (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)hasSurveysAvailable SWIFT_WARN_UNUSED_RESULT;
 - (void)refreshHasAvailableSurveys;
 - (void)takeNextSurvey;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
