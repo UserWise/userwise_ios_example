@@ -25,7 +25,7 @@
     // and user id.
     [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
     [self.userWise setUserId:@"userwise-ios-example"];
-    // or: [self.userWise initializeWithApiKey:NSString* _Nonnull userId:NSString* _Nonnull];
+    // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
 
     NSLog(@"API Key and User ID Set");
 }
