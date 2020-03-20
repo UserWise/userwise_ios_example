@@ -206,6 +206,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+
+
 @protocol UserWiseSurveyDelegate;
 @class UIImage;
 
@@ -219,7 +221,7 @@ SWIFT_CLASS_NAMED("UserWise")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (void)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId;
-- (void)setSplashScreenColorsWithPrimaryColor:(UIColor * _Nonnull)primaryColor backgroundColor:(UIColor * _Nonnull)backgroundColor;
+- (void)setColorsWithPrimaryColor:(UIColor * _Nullable)primaryColor splashScreenBackgroundColor:(UIColor * _Nullable)splashScreenBackgroundColor;
 - (void)setSplashScreenLogo:(UIImage * _Nonnull)logo;
 - (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)hasSurveysAvailable SWIFT_WARN_UNUSED_RESULT;
@@ -454,6 +456,8 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+
+
 @protocol UserWiseSurveyDelegate;
 @class UIImage;
 
@@ -467,7 +471,7 @@ SWIFT_CLASS_NAMED("UserWise")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (void)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId;
-- (void)setSplashScreenColorsWithPrimaryColor:(UIColor * _Nonnull)primaryColor backgroundColor:(UIColor * _Nonnull)backgroundColor;
+- (void)setColorsWithPrimaryColor:(UIColor * _Nullable)primaryColor splashScreenBackgroundColor:(UIColor * _Nullable)splashScreenBackgroundColor;
 - (void)setSplashScreenLogo:(UIImage * _Nonnull)logo;
 - (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)hasSurveysAvailable SWIFT_WARN_UNUSED_RESULT;

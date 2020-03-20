@@ -28,8 +28,8 @@
     // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
     
     // you can set the colors and logo used on the splash screen
-    [self.userWise setSplashScreenColorsWithPrimaryColor: UIColor.purpleColor backgroundColor:UIColor.whiteColor];
-    [self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
+    //[self.userWise setSplashScreenColorsWithPrimaryColor: UIColor.purpleColor backgroundColor:UIColor.whiteColor];
+    //[self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
 
     NSLog(@"API Key and User ID Set");
 }
