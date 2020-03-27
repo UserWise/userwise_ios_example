@@ -24,7 +24,7 @@
     // The appuser will be initialized once we've received both your API Key
     // and user id.
     [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
-    [self.userWise setUserId:@"userwises-ios-example12102s1aq1a1aa"];
+    [self.userWise setUserId:@"userwise-ios-example"];
     // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
 
     // you can set the colors and logo used on the splash screen
