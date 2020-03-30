@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		180F0B3D240DD1E600585676 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 180F0B3C240DD1E600585676 /* UIView+Toast.m */; };
-		18183E5B23F308C000173F4F /* UserWiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18183E5623F21F3C00173F4F /* UserWiseSDK.framework */; };
-		18183E5C23F308C000173F4F /* UserWiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18183E5623F21F3C00173F4F /* UserWiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		32F2D2774CC2465AB882D789 /* Pods_UserWiseDemoAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE7809672720A6F00760870 /* Pods_UserWiseDemoAPP.framework */; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
 		724E77E61EF14C6500271C2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E51EF14C6500271C2F /* main.m */; };
 		724E77E91EF14C6500271C2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E81EF14C6500271C2F /* AppDelegate.m */; };
@@ -34,7 +33,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				18183E5C23F308C000173F4F /* UserWiseSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +42,6 @@
 /* Begin PBXFileReference section */
 		180F0B3B240DD1C400585676 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		180F0B3C240DD1E600585676 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
-		18183E5623F21F3C00173F4F /* UserWiseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserWiseSDK.framework; sourceTree = "<group>"; };
 		7239634E20273F7300702509 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		7239635020273F7300702509 /* UserWiseiOSExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UserWiseiOSExampleApp.entitlements; sourceTree = "<group>"; };
 		724E77E11EF14C6500271C2F /* UserWise Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UserWise Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +62,9 @@
 		724E78081EF14CF600271C2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		724E780A1EF14CFC00271C2F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		724E780C1EF14D0300271C2F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		7999625D5216FF681DE0B9D4 /* Pods-UserWiseDemoAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserWiseDemoAPP.release.xcconfig"; path = "Target Support Files/Pods-UserWiseDemoAPP/Pods-UserWiseDemoAPP.release.xcconfig"; sourceTree = "<group>"; };
+		BC0833801FFC11FE6D1C16BA /* Pods-UserWiseDemoAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserWiseDemoAPP.debug.xcconfig"; path = "Target Support Files/Pods-UserWiseDemoAPP/Pods-UserWiseDemoAPP.debug.xcconfig"; sourceTree = "<group>"; };
+		EBE7809672720A6F00760870 /* Pods_UserWiseDemoAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserWiseDemoAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,20 +80,30 @@
 				724E78031EF14CDE00271C2F /* Foundation.framework in Frameworks */,
 				7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */,
 				724E78011EF14CD700271C2F /* CoreTelephony.framework in Frameworks */,
-				18183E5B23F308C000173F4F /* UserWiseSDK.framework in Frameworks */,
 				724E77FF1EF14CCE00271C2F /* AdSupport.framework in Frameworks */,
+				32F2D2774CC2465AB882D789 /* Pods_UserWiseDemoAPP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		66DB30F9C1BD8391D4EBD0A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC0833801FFC11FE6D1C16BA /* Pods-UserWiseDemoAPP.debug.xcconfig */,
+				7999625D5216FF681DE0B9D4 /* Pods-UserWiseDemoAPP.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		724E77D81EF14C6500271C2F = {
 			isa = PBXGroup;
 			children = (
 				724E77E31EF14C6500271C2F /* UserWiseiOSExampleApp */,
 				724E77E21EF14C6500271C2F /* Products */,
 				724E77FD1EF14CCD00271C2F /* Frameworks */,
+				66DB30F9C1BD8391D4EBD0A8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,7 +145,6 @@
 		724E77FD1EF14CCD00271C2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				18183E5623F21F3C00173F4F /* UserWiseSDK.framework */,
 				7239634E20273F7300702509 /* ExternalAccessory.framework */,
 				724E780C1EF14D0300271C2F /* WebKit.framework */,
 				724E780A1EF14CFC00271C2F /* UIKit.framework */,
@@ -145,6 +154,7 @@
 				724E78021EF14CDE00271C2F /* Foundation.framework */,
 				724E78001EF14CD700271C2F /* CoreTelephony.framework */,
 				724E77FE1EF14CCE00271C2F /* AdSupport.framework */,
+				EBE7809672720A6F00760870 /* Pods_UserWiseDemoAPP.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,10 +166,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 724E77F81EF14C6500271C2F /* Build configuration list for PBXNativeTarget "UserWiseDemoAPP" */;
 			buildPhases = (
+				E4ACFED7062A7CFBA00A5800 /* [CP] Check Pods Manifest.lock */,
 				724E77DD1EF14C6500271C2F /* Sources */,
 				724E77DE1EF14C6500271C2F /* Frameworks */,
 				724E77DF1EF14C6500271C2F /* Resources */,
 				18183E5D23F308C000173F4F /* Embed Frameworks */,
+				E2E32A4E223277C276314E3F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,6 +233,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E2E32A4E223277C276314E3F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UserWiseDemoAPP/Pods-UserWiseDemoAPP-frameworks.sh",
+				"${PODS_ROOT}/UserWise/UserWiseSDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UserWiseSDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UserWiseDemoAPP/Pods-UserWiseDemoAPP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4ACFED7062A7CFBA00A5800 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UserWiseDemoAPP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		724E77DD1EF14C6500271C2F /* Sources */ = {
@@ -308,7 +363,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -368,6 +423,7 @@
 		};
 		724E77F91EF14C6500271C2F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC0833801FFC11FE6D1C16BA /* Pods-UserWiseDemoAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UserWiseiOSExampleApp/UserWiseiOSExampleApp.entitlements;
@@ -380,7 +436,8 @@
 				INFOPLIST_FILE = UserWiseiOSExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.userwise.UserWiseDemoApp;
 				PRODUCT_NAME = "UserWise Demo App";
 			};
@@ -388,6 +445,7 @@
 		};
 		724E77FA1EF14C6500271C2F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7999625D5216FF681DE0B9D4 /* Pods-UserWiseDemoAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UserWiseiOSExampleApp/UserWiseiOSExampleApp.entitlements;
@@ -400,7 +458,8 @@
 				INFOPLIST_FILE = UserWiseiOSExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = io.userwise.UserWiseDemoApp;
 				PRODUCT_NAME = "UserWise Demo App";
 			};
