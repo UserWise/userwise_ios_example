@@ -1,0 +1,16 @@
+PODS:
+  - UserWise (0.1.3)
+
+DEPENDENCIES:
+  - UserWise
+
+SPEC REPOS:
+  trunk:
+    - UserWise
+
+SPEC CHECKSUMS:
+  UserWise: d3ca2cd1f25f04af39504723496a9ec897e17319
+
+PODFILE CHECKSUM: 03757de5b9425e2c0feef20e2dd07ee4dbb1eb93
+
+COCOAPODS: 1.9.1
