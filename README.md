@@ -1,14 +1,14 @@
 # UserWise iOS SDK Example
-UserWise iOS SDK v1.0.0
+UserWise iOS SDK v0.1.3
 
-## v1.0.0
-- Initial Release (tentative)
+## v0.1.3
+- Initial Release
 
 #### Cocoapods:
 Add the following to your `podfile`
 
   ```groovy
-  pod 'UserWise', ‘1.0.0’
+  pod 'UserWise'
   ```
 
 #### Manual:
