@@ -6,5 +6,5 @@ target 'UserWiseDemoAPP' do
   use_frameworks!
 
   # Pods for UserWiseDemoAPP
-  pod 'UserWise'
+  pod 'UserWise', '1.0.0'
 end
