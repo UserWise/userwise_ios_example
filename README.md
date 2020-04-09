@@ -1,24 +1,12 @@
-# UserWise iOS SDK Example
-UserWise iOS SDK v1.0.0
+# UserWise SDK iOS Example
 
+This repository hosts an example ios application running the latest UserWise SDK release. Information on learning how to properly integrate with the SDK can be found in the documentation link below.
 
-## Installation Directions
-
-### Cocoapods
-Add the following to your `podfile`
-
-  ```groovy
-  pod 'UserWise'
-  ```
-
-### Manual
-Download the latest version of the [UserWise iOS SDK](https://github.com/userwise/userwise_ios_example) and add the **UserWiseSDK.framework** to your project. Follow the integration guide to setup your application to use UserWise.
-
+## Links:
+- [UserWise iOS SDK Documentation](https://docs.userwise.io/#ios-sdk)
+- [UserWise Android SDK](https://github.com/UserWise/userwise_android_example)
+- [UserWise Unity SDK](https://github.com/UserWise/userwise_unity_example)
 
 ## Versions
-
 ### v1.0.0
-- Initial Release (tentative)
-
-## Other platforms:
-[UserWise Android SDK Integration](https://github.com/userwise/userwise_android_example)
+- Initial Live-Ready Release
