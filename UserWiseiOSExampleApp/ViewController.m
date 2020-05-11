@@ -24,7 +24,7 @@
     // The appuser will be initialized once we've received both your API Key
     // and user id.
     [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
-    [self.userWise setUserId:@"userwise-ios-example-new"];
+    [self.userWise setUserId:@"userwise-ios-example"];
     // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
 
     // you can set the colors and logo used on the splash screen
@@ -45,12 +45,27 @@
 }
 
 - (IBAction)takeNextSurvey:(id)sender {
+    //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
+    //[self.userWise setAttributes:attributes];
+    //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
+    
     if ([self.userWise hasSurveysAvailable]) {
-        [self.userWise takeNextSurvey];
+        [self.userWise initializeSurveyInviteWithDelegate:self];
         return;
     }
     
     [self showTemporaryMessage:@"Cannot take survey. No surveys to take!"];
+}
+
+-(void)onSurveyInviteInitializedWithWasSuccessfullyInitialized:(BOOL)wasSuccessfullyInitialized {
+    // The UserWise system could not properly initialize a new survey invite resource. The user will
+    // be able to receive this survey again, for now you should bail out.
+    if (!wasSuccessfullyInitialized) { return; }
+    
+    // NO will cause userwise to note the user's response (helpful for future targeting and estimations) and
+    // bail. YES will cause UserWise to start the survey entry process. This is the point where UserWiseSurveyDelegate
+    // methods start being called (e.g: onSurveyEntered, etc.)
+    [self.userWise setSurveyInviteResponseWithSurveyInviteResponse:YES];
 }
 
 -(void)onSurveyEntered {

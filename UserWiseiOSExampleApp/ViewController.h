@@ -8,7 +8,7 @@
 #import <UserWiseSDK/UserWiseSDK-Swift.h>
 #import "UIView+Toast.h"
 
-@interface ViewController : UIViewController <UserWiseSurveyDelegate>
+@interface ViewController : UIViewController <UserWiseSurveyDelegate, UserWiseSurveyInviteDelegate>
 
 @property (strong, nonatomic) UserWise *userWise;
 
