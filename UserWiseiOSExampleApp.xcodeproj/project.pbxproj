@@ -88,20 +88,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		66DB30F9C1BD8391D4EBD0A8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		724E77D81EF14C6500271C2F = {
 			isa = PBXGroup;
 			children = (
 				724E77E31EF14C6500271C2F /* UserWiseiOSExampleApp */,
 				724E77E21EF14C6500271C2F /* Products */,
 				724E77FD1EF14CCD00271C2F /* Frameworks */,
-				66DB30F9C1BD8391D4EBD0A8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
