@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		180F0B3D240DD1E600585676 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 180F0B3C240DD1E600585676 /* UIView+Toast.m */; };
 		184F1E232469C7A000FB758D /* UserWiseSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 184F1E222469C7A000FB758D /* UserWiseSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		184F1E262469F8AC00FB758D /* UserWiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184F1E222469C7A000FB758D /* UserWiseSDK.framework */; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
 		724E77E61EF14C6500271C2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E51EF14C6500271C2F /* main.m */; };
 		724E77E91EF14C6500271C2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E81EF14C6500271C2F /* AppDelegate.m */; };
@@ -80,6 +81,7 @@
 				7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */,
 				724E78011EF14CD700271C2F /* CoreTelephony.framework in Frameworks */,
 				724E77FF1EF14CCE00271C2F /* AdSupport.framework in Frameworks */,
+				184F1E262469F8AC00FB758D /* UserWiseSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
