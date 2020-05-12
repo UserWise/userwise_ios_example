@@ -7,6 +7,7 @@
 #import <UIKit/UIKit.h>
 #import <UserWiseSDK/UserWiseSDK-Swift.h>
 #import "UIView+Toast.h"
+#import "SurveyOfferViewController.h"
 
 @interface ViewController : UIViewController <UserWiseSurveyDelegate, UserWiseSurveyInviteDelegate>
 

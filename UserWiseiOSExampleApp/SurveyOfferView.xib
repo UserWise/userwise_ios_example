@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SurveyOfferViewController">
+            <connections>
+                <outlet property="offerAcceptBtn" destination="G7i-gC-mFa" id="6AF-ju-7sF"/>
+                <outlet property="offerCloseBtn" destination="g2e-W8-YC5" id="9Qj-9w-xnR"/>
+                <outlet property="offerImageView" destination="Nfc-7l-qOS" id="rCU-lM-YFY"/>
+                <outlet property="view" destination="iN0-l3-epB" id="BIz-tV-FzH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" layoutMarginsFollowReadableWidth="YES" image="trivia-crack-offer" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfc-7l-qOS">
+                    <rect key="frame" x="0.0" y="80" width="414" height="736"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Nfc-7l-qOS" secondAttribute="height" multiplier="9:16" id="9Vp-IL-Tj2"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="08M-lU-XX4"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="G7i-gC-mFa">
+                    <rect key="frame" x="345" y="120" width="69" height="61"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                    <state key="normal" title="Close Offer">
+                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="clickOfferClose:" destination="-1" eventType="touchUpInside" id="dXn-iL-bag"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="g2e-W8-YC5">
+                    <rect key="frame" x="32" y="673" width="350" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="clickOfferAccept:" destination="-1" eventType="touchUpInside" id="thG-Iq-zGt"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.35880829015544047" green="0.35880829015544047" blue="0.35880829015544047" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Nfc-7l-qOS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Kqa-Cf-9uK"/>
+                <constraint firstItem="Nfc-7l-qOS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eXU-DR-fZY"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="164" y="77.955665024630548"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="trivia-crack-offer" width="414" height="736"/>
+    </resources>
+</document>
