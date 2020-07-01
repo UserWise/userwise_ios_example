@@ -15,31 +15,31 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.userWise = [UserWise sharedInstance];
     
+    // Step 1) Set our debug mode, and survey delegate
     [self.userWise setDebugMode:YES];
     [self.userWise setSurveyDelegate:self];
-    NSLog(@"UserWise Survey Delegate Set");
 
-    /** The appuser will be initialized once we've received both your API Key and user id. */
+    // Step 2) We set our app's api key and initialize the user by their _UNIQUE_ id.
     [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
     [self.userWise setUserId:@"userwise-ios-example"];
     // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
 
-    /** you can set the colors and logo used on the splash screen */
+    // Step 3) We call the onStart lifecycle method
+    [self.userWise onStart];
+    
+    // Step 4) We can override some of the loading screen design (e.g. colors and logo)
     //[self.userWise setColorsWithPrimaryColor:UIColor.purpleColor splashScreenBackgroundColor:UIColor.whiteColor];
     //[self.userWise setColorsWithPrimaryColor:UIColor.purpleColor backgroundColor:UIColor.whiteColor];
     //[self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
 
-    /** You can also assign attributes and events from within your app. */
+    // Step 5) You can assign your app user attributes and events directly within the SDK!
     //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
     //[self.userWise setAttributes:attributes];
     //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
-    
-    [self.userWise onStart];
-
-    NSLog(@"API Key and User ID Set");
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    // Step 6) Make sure you stop userwise (and it's internal poller) when the game is not actively running!
     [self.userWise onStop];
 }
 
