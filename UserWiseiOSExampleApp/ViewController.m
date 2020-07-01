@@ -10,7 +10,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     self.userWise = [UserWise sharedInstance];
     
     [self.userWise setDebugMode:YES];
@@ -28,12 +30,17 @@
     //[self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
     
     /** You can also assign attributes and events from within your app. */
-    //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
-    //[self.userWise setAttributes:attributes];
+    NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
+    [self.userWise setAttributes:attributes];
     //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
-     
+    
+    [self.userWise onStart];
 
     NSLog(@"API Key and User ID Set");
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.userWise onStop];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +55,7 @@
     [self.userWise initializeSurveyInviteWithDelegate:self];
 }
 
--(void)onSurveyInviteInitializedWithWasSuccessfullyInitialized:(BOOL)wasSuccessfullyInitialized {
+-(void)onSurveyInviteInitialized:(BOOL)wasSuccessfullyInitialized {
     // The UserWise system could not properly initialize a new survey invite resource. The user will
     // be able to receive this survey again, for now you should bail out.
     if (!wasSuccessfullyInitialized) { return; }

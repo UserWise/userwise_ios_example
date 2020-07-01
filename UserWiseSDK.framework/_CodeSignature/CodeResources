@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		RmXDMTflETi/ZK+bNtVo6q/bu0o=
+		1/fb4ura3en+0rsbg9tUiqappdY=
 		</data>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Headers/UserWiseSDK-Swift.h</key>
 		<data>
-		ygn97i3KNx9WQm7Jr9HEIcXlX0U=
+		hbjFYd2vlK+ijd+dFN5GOVJyMng=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		mSojc+B+0+h7309GtswLgks6E3M=
+		gvgXlfo6NLmMVNutk/bOju72nvg=
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		LYJTOlOnUkvmBhroxGLDIXMfgNY=
+		joggpCjkQyziYUTCsJS/qZwNVLM=
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		C95wQIImp+qSIiegF+d+oAhnVOQ=
+		Adln/5hy7uceFMDfOAaVl4gxcJk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -71,11 +71,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RmXDMTflETi/ZK+bNtVo6q/bu0o=
+			1/fb4ura3en+0rsbg9tUiqappdY=
 			</data>
 			<key>hash2</key>
 			<data>
-			3IJJ0mwBesUDxRSx0YfnUUAyY9W8yZ7I/dtInRUAjuo=
+			spcNdDZDcoW2F97LGkQ0O7htNKm5ldVHRB/MNbB+Ovs=
 			</data>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
@@ -159,11 +159,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ygn97i3KNx9WQm7Jr9HEIcXlX0U=
+			hbjFYd2vlK+ijd+dFN5GOVJyMng=
 			</data>
 			<key>hash2</key>
 			<data>
-			QZyHZr+3nA2PwDL0Pq21jU3NTPVTpvhEtsCDtD0SqLQ=
+			LFkvAOPKpG2IL2GPeWWMdr3YAlO9/SMoTQumdiF1c0Q=
 			</data>
 		</dict>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftdoc</key>
@@ -181,11 +181,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LYJTOlOnUkvmBhroxGLDIXMfgNY=
+			joggpCjkQyziYUTCsJS/qZwNVLM=
 			</data>
 			<key>hash2</key>
 			<data>
-			o+cwAPeBRwmx+xmaC17GpPtEqynVP01Q43yPeNc+Kqo=
+			+0lz9FG6v5ZyRcqNbh2Kq9A0+8/PB1NXHU//lVYikQg=
 			</data>
 		</dict>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftdoc</key>
@@ -203,11 +203,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			C95wQIImp+qSIiegF+d+oAhnVOQ=
+			Adln/5hy7uceFMDfOAaVl4gxcJk=
 			</data>
 			<key>hash2</key>
 			<data>
-			Tzq7cfaOOX0mCAE+JBpgbYpWTYN24E/UsgOHlPmj4Ho=
+			PzD7IOoZNzS1sd0UjCMOpHiLvQqVk25fAgoMw/a2Dtg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

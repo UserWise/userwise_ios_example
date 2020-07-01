@@ -14,12 +14,12 @@
 }
 
 - (IBAction)clickOfferClose:(id)sender {
-    [[UserWise sharedInstance] setSurveyInviteResponseWithSurveyInviteResponse:NO];
+    [[UserWise sharedInstance] setSurveyInviteResponse:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clickOfferAccept:(id)sender {
-    [[UserWise sharedInstance] setSurveyInviteResponseWithSurveyInviteResponse:YES];
+    [[UserWise sharedInstance] setSurveyInviteResponse:YES];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 @end
