@@ -28,10 +28,10 @@
     //[self.userWise setColorsWithPrimaryColor:UIColor.purpleColor splashScreenBackgroundColor:UIColor.whiteColor];
     //[self.userWise setColorsWithPrimaryColor:UIColor.purpleColor backgroundColor:UIColor.whiteColor];
     //[self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
-    
+
     /** You can also assign attributes and events from within your app. */
-    NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
-    [self.userWise setAttributes:attributes];
+    //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
+    //[self.userWise setAttributes:attributes];
     //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
     
     [self.userWise onStart];
