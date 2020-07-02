@@ -15,8 +15,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.userWise = [UserWise sharedInstance];
     
-    // Step 1) Set our debug mode, and survey delegate
     if (![self.userWise isInitialized]) {
+        // Step 1) Set our debug mode, and survey delegate
         [self.userWise setDebugMode:YES];
         [self.userWise setSurveyDelegate:self];
 
@@ -41,7 +41,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    // Step 6) Make sure you stop userwise (and it's internal poller) when the game is not actively running!
+    // Step 6) Make sure you stop userwise when the game is not actively running!
     [self.userWise onStop];
 }
 
