@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		1/fb4ura3en+0rsbg9tUiqappdY=
+		SimTXxtoqM5jbmuATVxCgjNp1XU=
 		</data>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		joggpCjkQyziYUTCsJS/qZwNVLM=
+		QYqg7plDXY0cnN0IgSQbeL/y1I0=
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -58,7 +58,7 @@
 		</data>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		Adln/5hy7uceFMDfOAaVl4gxcJk=
+		UjwZyvpF2SksHSGl++qUMKGqCA8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -71,11 +71,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1/fb4ura3en+0rsbg9tUiqappdY=
+			SimTXxtoqM5jbmuATVxCgjNp1XU=
 			</data>
 			<key>hash2</key>
 			<data>
-			spcNdDZDcoW2F97LGkQ0O7htNKm5ldVHRB/MNbB+Ovs=
+			rIGMHeYdu27XfhQbtFEEv/VDyU3NAeoCMx9jlM8bZuM=
 			</data>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
@@ -181,11 +181,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			joggpCjkQyziYUTCsJS/qZwNVLM=
+			QYqg7plDXY0cnN0IgSQbeL/y1I0=
 			</data>
 			<key>hash2</key>
 			<data>
-			+0lz9FG6v5ZyRcqNbh2Kq9A0+8/PB1NXHU//lVYikQg=
+			UV5n8SXCWIEFycueGB8o6zSLzOh4PzCpsfHewkLONfY=
 			</data>
 		</dict>
 		<key>Modules/UserWiseSDK.swiftmodule/x86_64.swiftdoc</key>
@@ -203,11 +203,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Adln/5hy7uceFMDfOAaVl4gxcJk=
+			UjwZyvpF2SksHSGl++qUMKGqCA8=
 			</data>
 			<key>hash2</key>
 			<data>
-			PzD7IOoZNzS1sd0UjCMOpHiLvQqVk25fAgoMw/a2Dtg=
+			LUDCJQAN/cgyfM8GErRFqjgCEIbl3iRsXSvHXSGOn0I=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

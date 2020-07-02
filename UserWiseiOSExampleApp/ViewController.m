@@ -16,13 +16,15 @@
     self.userWise = [UserWise sharedInstance];
     
     // Step 1) Set our debug mode, and survey delegate
-    [self.userWise setDebugMode:YES];
-    [self.userWise setSurveyDelegate:self];
+    if (![self.userWise isInitialized]) {
+        [self.userWise setDebugMode:YES];
+        [self.userWise setSurveyDelegate:self];
 
-    // Step 2) We set our app's api key and initialize the user by their _UNIQUE_ id.
-    [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
-    [self.userWise setUserId:@"userwise-ios-example"];
-    // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
+        // Step 2) We set our app's api key and initialize the user by their _UNIQUE_ id.
+        [self.userWise setApiKey:@"6b6552ebc324a570262deb6bdd4e"];
+        [self.userWise setUserId:@"userwise-ios-example"];
+        // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
+    }
 
     // Step 3) We call the onStart lifecycle method
     [self.userWise onStart];
