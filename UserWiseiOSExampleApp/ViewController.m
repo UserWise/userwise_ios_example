@@ -13,6 +13,42 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    if (@available(iOS 14, *)) {
+        [self askForIDFAPermissions];
+    } else {
+        [self initializeUserWiseSDK];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // Step 6) Make sure you stop userwise when the game is not actively running!
+    [self.userWise onStop];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)askForIDFAPermissions {
+    if (@available(iOS 14, *)) {
+#if __has_include(<AppTrackingTransparency/AppTrackingTransparency.h>)
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus authStatus) {
+                
+            if (authStatus == ATTrackingManagerAuthorizationStatusAuthorized) {
+                NSLog(@"You have allowed the example app to retrieve your IDFA.");
+            } else {
+                NSLog(@"You have denied the example app the right to retrieve your IDFA.");
+            }
+
+            [self initializeUserWiseSDK];
+        }];
+#else
+        [self initializeUserWiseSDK];
+#endif
+    }
+}
+
+- (void)initializeUserWiseSDK {
     self.userWise = [UserWise sharedInstance];
     
     if (![self.userWise isInitialized]) {
@@ -25,6 +61,8 @@
         [self.userWise setUserId:@"userwise-ios-example"];
         // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
     }
+    
+    NSLog([UserWiseUtility getIDFA]);
 
     // Step 3) We call the onStart lifecycle method
     [self.userWise onStart];
@@ -38,15 +76,6 @@
     //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
     //[self.userWise setAttributes:attributes];
     //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    // Step 6) Make sure you stop userwise when the game is not actively running!
-    [self.userWise onStop];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (IBAction)forceRefreshHasSurveysAvailable:(id)sender {
