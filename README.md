@@ -2,6 +2,8 @@
 
 [![Version](https://img.shields.io/cocoapods/v/UserWise.svg?style=flat)](https://cocoapods.org/pods/UserWise) 
 
+_NOTE: This app has the framework for physical devices (arm-based). The latest UW SDK simulator framework can be found by going to the UserWise iOS SDK Pod git repo, here: https://github.com/UserWise/userwise_ios_sdk_podspec/tree/master/simulator_
+
 This repository hosts an example ios application running the latest UserWise SDK release. Information on learning how to properly integrate with the SDK can be found in the documentation link below.
 
 ## Links:
