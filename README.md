@@ -13,6 +13,9 @@ This repository hosts an example ios application running the latest UserWise SDK
 
 ## Versions
 
+### v1.2.3/v1.2.2
+- Build configuration changes -- smaller framework size!
+
 ### v1.2.1
 - Added support for the new AppTrackingTransprency flow for iOS 14+
 - Major size decrease of the framework overall (rejoice! 🎉)
