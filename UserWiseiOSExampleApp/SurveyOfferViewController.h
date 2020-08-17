@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SurveyOfferViewController : UIViewController
     @property (weak) IBOutlet UIButton *offerAcceptBtn;
     @property (weak) IBOutlet UIButton *offerCloseBtn;
-    @property (weak) IBOutlet UIImageView *offerImageView;
 @end
 
 NS_ASSUME_NONNULL_END
