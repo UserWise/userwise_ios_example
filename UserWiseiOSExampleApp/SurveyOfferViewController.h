@@ -1,20 +1,21 @@
-//
-//  SurveyOfferViewController.h
-//  UserWiseDemoAPP
-//
-//  Created by David Jenkins on 5/12/20.
-//  Copyright © 2020 theoremreach. All rights reserved.
-//
+#ifndef SurveyOfferViewController_h
+#define SurveyOfferViewController_h
 
 #import "ViewController.h"
 #import "SurveyOfferView.h"
 #import "UserWiseSDK/UserWiseSDK-Swift.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface SurveyOfferViewController : UIViewController
-    @property (weak) IBOutlet UIButton *offerAcceptBtn;
-    @property (weak) IBOutlet UIButton *offerCloseBtn;
+
+@property NSString *responseId;
+@property NSString *inviteId;
+@property UserWise *userWise;
+
+@property (weak) IBOutlet UIButton *offerAcceptBtn;
+@property (weak) IBOutlet UIButton *offerCloseBtn;
+
+- (void)dismissSurveyOfferView;
+
 @end
 
-NS_ASSUME_NONNULL_END
+#endif

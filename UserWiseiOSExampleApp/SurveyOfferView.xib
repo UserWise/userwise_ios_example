@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17147" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,7 +52,7 @@
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
                     </variation>
                 </label>
-                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Vc-Tz-0Ky">
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Vc-Tz-0Ky">
                     <rect key="frame" x="50" y="484.33333333333331" width="314" height="35.999999999999943"/>
                     <color key="backgroundColor" red="0.68568384650000003" green="0.99984508750000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -62,7 +62,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     </variation>
                     <connections>
-                        <action selector="clickOfferAccept:" destination="-2" eventType="touchUpInside" id="dEj-dS-Ud4"/>
+                        <action selector="clickOfferAccept:" destination="-1" eventType="touchUpInside" id="aGG-KW-8U6"/>
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_marker" translatesAutoresizingMaskIntoConstraints="NO" id="KAr-cg-yxi">
@@ -72,14 +72,13 @@
                     <rect key="frame" x="365" y="54" width="34" height="34"/>
                     <state key="normal" image="close"/>
                     <connections>
-                        <action selector="clickOfferClose:" destination="-2" eventType="touchUpInside" id="zqQ-dI-zpD"/>
+                        <action selector="clickOfferClose:" destination="-1" eventType="touchUpInside" id="UHk-kj-GLE"/>
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purple_marker" translatesAutoresizingMaskIntoConstraints="NO" id="TFg-mm-5fb">
                     <rect key="frame" x="0.0" y="545.33333333333337" width="70" height="14"/>
                 </imageView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.02930797823" green="0.034438386559999999" blue="0.1529516876" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="KAr-cg-yxi" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="1FT-vI-wJt"/>
@@ -125,6 +124,7 @@
                 <constraint firstItem="7Q0-H9-2gQ" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="-50" id="yBp-Sw-ehd"/>
                 <constraint firstItem="Nj2-dm-ztt" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="zUC-rM-8Ri"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="163.28125" y="77.34375"/>
         </view>
     </objects>

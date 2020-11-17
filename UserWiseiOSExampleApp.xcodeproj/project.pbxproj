@@ -12,6 +12,8 @@
 		184F1E262469F8AC00FB758D /* UserWiseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184F1E222469C7A000FB758D /* UserWiseSDK.framework */; };
 		187D8E7B246B3123001F0B10 /* SurveyOfferView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187D8E7A246B3123001F0B10 /* SurveyOfferView.xib */; };
 		187D8E81246B3A34001F0B10 /* SurveyOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D8E80246B3A34001F0B10 /* SurveyOfferViewController.m */; };
+		189364A22562DF2D00044B82 /* ExampleSurveyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */; };
+		189364A52562E2E200044B82 /* ExampleOfferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A42562E2E200044B82 /* ExampleOfferDelegate.m */; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
 		724E77E61EF14C6500271C2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E51EF14C6500271C2F /* main.m */; };
 		724E77E91EF14C6500271C2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E81EF14C6500271C2F /* AppDelegate.m */; };
@@ -51,6 +53,10 @@
 		187D8E7F246B3A34001F0B10 /* SurveyOfferViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveyOfferViewController.h; sourceTree = "<group>"; };
 		187D8E80246B3A34001F0B10 /* SurveyOfferViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SurveyOfferViewController.m; sourceTree = "<group>"; };
 		18809DB724C0A22D00798FA2 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		189364A02562DE0D00044B82 /* ExampleSurveyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleSurveyDelegate.h; sourceTree = "<group>"; };
+		189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleSurveyDelegate.m; sourceTree = "<group>"; };
+		189364A42562E2E200044B82 /* ExampleOfferDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleOfferDelegate.m; sourceTree = "<group>"; };
+		189364A62562E2F100044B82 /* ExampleOfferDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleOfferDelegate.h; sourceTree = "<group>"; };
 		7239634E20273F7300702509 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		7239635020273F7300702509 /* UserWiseiOSExampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UserWiseiOSExampleApp.entitlements; sourceTree = "<group>"; };
 		724E77E11EF14C6500271C2F /* UserWise Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UserWise Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +110,34 @@
 			name = SurveyOffer;
 			sourceTree = "<group>";
 		};
+		1893649E2562DD5A00044B82 /* Surveys */ = {
+			isa = PBXGroup;
+			children = (
+				187D8E82246B3D1A001F0B10 /* SurveyOffer */,
+				189364A02562DE0D00044B82 /* ExampleSurveyDelegate.h */,
+				189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */,
+			);
+			name = Surveys;
+			sourceTree = "<group>";
+		};
+		1893649F2562DD9700044B82 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				180F0B3B240DD1C400585676 /* UIView+Toast.h */,
+				180F0B3C240DD1E600585676 /* UIView+Toast.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		189364A32562E2D200044B82 /* Offers */ = {
+			isa = PBXGroup;
+			children = (
+				189364A62562E2F100044B82 /* ExampleOfferDelegate.h */,
+				189364A42562E2E200044B82 /* ExampleOfferDelegate.m */,
+			);
+			name = Offers;
+			sourceTree = "<group>";
+		};
 		724E77D81EF14C6500271C2F = {
 			isa = PBXGroup;
 			children = (
@@ -124,14 +158,14 @@
 		724E77E31EF14C6500271C2F /* UserWiseiOSExampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				187D8E82246B3D1A001F0B10 /* SurveyOffer */,
+				189364A32562E2D200044B82 /* Offers */,
+				1893649F2562DD9700044B82 /* Utils */,
+				1893649E2562DD5A00044B82 /* Surveys */,
 				7239635020273F7300702509 /* UserWiseiOSExampleApp.entitlements */,
 				724E77E71EF14C6500271C2F /* AppDelegate.h */,
 				724E77E81EF14C6500271C2F /* AppDelegate.m */,
 				724E77EA1EF14C6500271C2F /* ViewController.h */,
 				724E77EB1EF14C6500271C2F /* ViewController.m */,
-				180F0B3B240DD1C400585676 /* UIView+Toast.h */,
-				180F0B3C240DD1E600585676 /* UIView+Toast.m */,
 				724E77ED1EF14C6500271C2F /* Main.storyboard */,
 				724E77F21EF14C6500271C2F /* LaunchScreen.storyboard */,
 				724E77F51EF14C6500271C2F /* Info.plist */,
@@ -249,8 +283,10 @@
 				180F0B3D240DD1E600585676 /* UIView+Toast.m in Sources */,
 				724E77EC1EF14C6500271C2F /* ViewController.m in Sources */,
 				724E77E91EF14C6500271C2F /* AppDelegate.m in Sources */,
+				189364A22562DF2D00044B82 /* ExampleSurveyDelegate.m in Sources */,
 				187D8E81246B3A34001F0B10 /* SurveyOfferViewController.m in Sources */,
 				724E77E61EF14C6500271C2F /* main.m in Sources */,
+				189364A52562E2E200044B82 /* ExampleOfferDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

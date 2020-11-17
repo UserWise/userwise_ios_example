@@ -11,15 +11,20 @@
 @implementation SurveyOfferViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.userWise = UserWise.sharedInstance;
 }
 
 - (IBAction)clickOfferClose:(id)sender {
-    [[UserWise sharedInstance] setSurveyInviteResponse:NO];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.userWise.surveysModule setSurveyInviteResponseWithResponseId:[self responseId] inviteId:[self inviteId] wasAccepted:NO];
+    [self dismissSurveyOfferView];
 }
 
 - (IBAction)clickOfferAccept:(id)sender {
-    [[UserWise sharedInstance] setSurveyInviteResponse:YES];
+    [self.userWise.surveysModule setSurveyInviteResponseWithResponseId:[self responseId] inviteId:[self inviteId] wasAccepted:YES];
+    [self dismissSurveyOfferView];
+}
+
+- (void)dismissSurveyOfferView {
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 @end
