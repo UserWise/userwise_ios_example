@@ -15,7 +15,6 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    // Step 6) Make sure you stop userwise when the game is not actively running!
     [self.userWise onStop];
 }
 
@@ -47,21 +46,22 @@
     if (![self.userWise isInitialized]) {
         [self.userWise setDebugMode:YES];
         [self.userWise setHostOverride:[NSURL URLWithString:@"http://127.0.0.1:3000"]];
-        [self.userWise setApiKey:@"0af5b8279d1ae000b2f4836fa7e0"];
-        [self.userWise setUserId:@"userwise-ios-example-userasdf"];
+        [self.userWise setApiKey:@"2fac619fdeecba9f3fb3c7228406"];
+        [self.userWise setUserId:@"userwise-demo-app-user"];
         // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
     }
 
     [self.userWise onStart];
-    [self.userWise.surveysModule setSurveyDelegate:[ExampleSurveyDelegate initWithController:self andUserWise:self.userWise]];
-    [self.userWise.offersModule setOfferDelegate:[ExampleOfferDelegate initWithController:self andUserWise:self.userWise]];
-    
-    // Step 4) We can override some of the loading screen design (e.g. colors and logo)
-    //[self.userWise setColorsWithPrimaryColor:UIColor.purpleColor splashScreenBackgroundColor:UIColor.whiteColor];
-    //[self.userWise setColorsWithPrimaryColor:UIColor.purpleColor backgroundColor:UIColor.whiteColor];
-    //[self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
 
-    // Step 5) You can assign your app user attributes and events directly within the SDK!
+    // SurveysModule Configuration
+    [self.userWise.surveysModule setSurveyDelegate:[ExampleSurveyDelegate initWithController:self andUserWise:self.userWise]];
+    // [self.userWise.surveysModule setColorsWithPrimaryColor:UIColor.purpleColor splashScreenBackgroundColor:UIColor.whiteColor];
+    // [self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
+    
+    // OffersModule Configuration
+    [self.userWise.offersModule setOfferDelegate:[ExampleOfferDelegate initWithController:self andUserWise:self.userWise]];
+
+    // Finally, you can assign your app user attributes and events directly within the SDK!
     //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
     //[self.userWise setAttributes:attributes];
     //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
