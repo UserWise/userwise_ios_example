@@ -9,12 +9,26 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #endif
 
-@interface ViewController : UIViewController
+@interface FileHandler : NSObject <UserWiseMediaInfoDelegate>
+- (void)onSuccessWithMediaInfo:(MediaInfo *)mediaInfo;
+- (void)onFailure;
+@end
+
+@interface ViewController : UIViewController <UserWiseVariablesDelegate>
 
 @property (strong, nonatomic) UserWise *userWise;
 
+@property (strong, nonatomic) IntegerVariable *maxLevelVar;
+@property (strong, nonatomic) BooleanVariable *enableThingAVar;
+@property (strong, nonatomic) DatetimeVariable *startThisThingAtVar;
+@property (strong, nonatomic) StringVariable *titleVar;
+@property (strong, nonatomic) StringVariable *descriptionVar;
+@property (strong, nonatomic) FloatVariable *exchangeRateVar;
+@property (strong, nonatomic) FileVariable *headerImageVar;
+
 - (void)askForIDFAPermissions;
 - (void)initializeUserWiseSDK;
+- (void)onVariablesInitialized;
 
 @end
 

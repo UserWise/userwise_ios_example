@@ -210,6 +210,68 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+enum VariableType : NSInteger;
+
+SWIFT_CLASS_NAMED("Variable")
+@interface Variable : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum VariableType type;
+@property (nonatomic, readonly) id _Nullable defaultValue;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("BooleanVariable")
+@interface BooleanVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(BOOL)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (BOOL)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("DatetimeVariable")
+@interface DatetimeVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSDate * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSDate * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("FileVariable")
+@interface FileVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("FloatVariable")
+@interface FloatVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(float)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (float)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("IntegerVariable")
+@interface IntegerVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSInteger)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSInteger)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("MediaInfo")
+@interface MediaInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull contentType;
+@property (nonatomic, readonly, copy) NSString * _Nonnull url;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
@@ -248,7 +310,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, OfferImpressionState, "OfferImpressionState"
 
 SWIFT_CLASS("_TtC11UserWiseSDK20OfferPopupController")
 @interface OfferPopupController : UIViewController
-+ (OfferPopupController * _Nonnull)loadControllerWithOfferImpression:(OfferImpression * _Nonnull)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
++ (OfferPopupController * _Nonnull)loadControllerWithOfferImpression:(OfferImpression * _Nullable)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
 - (void)loadView;
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -256,6 +318,15 @@ SWIFT_CLASS("_TtC11UserWiseSDK20OfferPopupController")
 @end
 
 
+
+
+SWIFT_CLASS_NAMED("OfferPopupManager")
+@interface OfferPopupManager : NSObject
++ (OfferPopupController * _Nullable)showOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
++ (void)hideOffer;
++ (BOOL)isAnOfferDisplayed SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, OfferViewAttemptFailedReason, "OfferViewAttemptFailedReason", open) {
   OfferViewAttemptFailedReasonOfferAlreadyActive = 0,
@@ -273,10 +344,18 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 - (void)initializeOfferImpressionWithOfferId:(NSString * _Nonnull)offerId;
 - (void)updateOfferImpressionStateWithOfferImpression:(OfferImpression * _Nonnull)offerImpression newState:(enum OfferImpressionState)newState;
 - (void)showOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
-- (void)dismissOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
-- (void)acceptOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)dismissOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
+- (void)acceptOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("StringVariable")
+@interface StringVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
 
 @class UIColor;
@@ -310,6 +389,7 @@ SWIFT_CLASS("_TtC11UserWiseSDK23SurveyWebViewController")
 /// Central interface used when working with UserWise surveys & polls..
 SWIFT_CLASS_NAMED("SurveysModule")
 @interface SurveysModule : NSObject
+@property (nonatomic, readonly, strong) SurveySplashScreenStyles * _Nonnull styleConfiguration;
 @property (nonatomic, strong) id <UserWiseSurveyDelegate> _Nullable surveyDelegate;
 @property (nonatomic) BOOL isTakingSurvey;
 - (void)setSplashScreenLogo:(UIImage * _Nonnull)logo;
@@ -323,27 +403,39 @@ SWIFT_CLASS_NAMED("SurveysModule")
 
 
 
+@class VariablesModule;
+@protocol UserWiseMediaInfoDelegate;
 
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 @property (nonatomic, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, strong) OffersModule * _Nullable offersModule;
+@property (nonatomic, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
 @property (nonatomic, copy) NSString * _Nullable userId;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
-+ (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId SWIFT_WARN_UNUSED_RESULT;
 - (void)onStart;
 - (void)onStop;
 - (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
 - (void)forcePollRequest;
 - (BOOL)isAnyContentActive SWIFT_WARN_UNUSED_RESULT;
+- (void)getMediaWithMediaId:(NSString * _Nonnull)mediaId handler:(id <UserWiseMediaInfoDelegate> _Nonnull)handler;
 - (void)assignEvent:(NSString * _Nonnull)eventName attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
 - (void)setAttributes:(NSDictionary<NSString *, id> * _Nonnull)attributes;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
++ (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseMediaInfoDelegate")
+@protocol UserWiseMediaInfoDelegate
+- (void)onSuccessWithMediaInfo:(MediaInfo * _Nonnull)mediaInfo;
+- (void)onFailure;
 @end
 
 
@@ -360,13 +452,13 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 /// Called when an offer impression has been successfully initialized
 - (void)onOfferImpressionInitialized:(OfferImpression * _Nonnull)offerImpression;
 /// Called once the offer’s WebView has successfully loaded, and is being displayed
-- (void)onOfferViewedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferViewedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called if UserWise failed to load the offer
-- (void)onOfferViewAttemptFailedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression reason:(enum OfferViewAttemptFailedReason)reason;
+- (void)onOfferViewAttemptFailedWithOfferImpression:(OfferImpression * _Nullable)offerImpression reason:(enum OfferViewAttemptFailedReason)reason;
 /// Called when the offer WebView has been dismissed (only when <em>NOT</em> accepted);
-- (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called whent he offer WebView accept CTA has been tapped.
-- (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 @end
 
 
@@ -395,10 +487,40 @@ SWIFT_CLASS_NAMED("UserWiseUtility")
 + (NSString * _Nullable)getOsVersion SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)getPhoneCarrier SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getDeviceType SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getTimeZoneIdentifier SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getIDFA SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getLanguage SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)getConnectionType SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseVariablesDelegate")
+@protocol UserWiseVariablesDelegate
+- (void)onVariablesInitialized;
+@end
+
+
+typedef SWIFT_ENUM_NAMED(NSInteger, VariableType, "VariableType", open) {
+  VariableTypeString = 0,
+  VariableTypeInteger = 1,
+  VariableTypeFloat = 2,
+  VariableTypeDatetime = 3,
+  VariableTypeBoolean = 4,
+  VariableTypeFile = 5,
+};
+
+
+SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
+@interface VariablesModule : NSObject
+@property (nonatomic, strong) id <UserWiseVariablesDelegate> _Nullable variablesDelegate;
+- (Variable * _Nullable)getVariableDefinitionWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)defineWithVariables:(NSArray<Variable *> * _Nonnull)variables error:(NSError * _Nullable * _Nullable)error;
+- (Variable * _Nullable)defineVariableWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (Variable * _Nullable)define:(Variable * _Nonnull)variable error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getModuleName SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -618,6 +740,68 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+enum VariableType : NSInteger;
+
+SWIFT_CLASS_NAMED("Variable")
+@interface Variable : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum VariableType type;
+@property (nonatomic, readonly) id _Nullable defaultValue;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("BooleanVariable")
+@interface BooleanVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(BOOL)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (BOOL)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("DatetimeVariable")
+@interface DatetimeVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSDate * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSDate * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("FileVariable")
+@interface FileVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("FloatVariable")
+@interface FloatVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(float)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (float)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("IntegerVariable")
+@interface IntegerVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSInteger)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSInteger)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("MediaInfo")
+@interface MediaInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull contentType;
+@property (nonatomic, readonly, copy) NSString * _Nonnull url;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
@@ -656,7 +840,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, OfferImpressionState, "OfferImpressionState"
 
 SWIFT_CLASS("_TtC11UserWiseSDK20OfferPopupController")
 @interface OfferPopupController : UIViewController
-+ (OfferPopupController * _Nonnull)loadControllerWithOfferImpression:(OfferImpression * _Nonnull)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
++ (OfferPopupController * _Nonnull)loadControllerWithOfferImpression:(OfferImpression * _Nullable)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
 - (void)loadView;
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -664,6 +848,15 @@ SWIFT_CLASS("_TtC11UserWiseSDK20OfferPopupController")
 @end
 
 
+
+
+SWIFT_CLASS_NAMED("OfferPopupManager")
+@interface OfferPopupManager : NSObject
++ (OfferPopupController * _Nullable)showOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
++ (void)hideOffer;
++ (BOOL)isAnOfferDisplayed SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, OfferViewAttemptFailedReason, "OfferViewAttemptFailedReason", open) {
   OfferViewAttemptFailedReasonOfferAlreadyActive = 0,
@@ -681,10 +874,18 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 - (void)initializeOfferImpressionWithOfferId:(NSString * _Nonnull)offerId;
 - (void)updateOfferImpressionStateWithOfferImpression:(OfferImpression * _Nonnull)offerImpression newState:(enum OfferImpressionState)newState;
 - (void)showOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
-- (void)dismissOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
-- (void)acceptOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)dismissOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
+- (void)acceptOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("StringVariable")
+@interface StringVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
 
 @class UIColor;
@@ -718,6 +919,7 @@ SWIFT_CLASS("_TtC11UserWiseSDK23SurveyWebViewController")
 /// Central interface used when working with UserWise surveys & polls..
 SWIFT_CLASS_NAMED("SurveysModule")
 @interface SurveysModule : NSObject
+@property (nonatomic, readonly, strong) SurveySplashScreenStyles * _Nonnull styleConfiguration;
 @property (nonatomic, strong) id <UserWiseSurveyDelegate> _Nullable surveyDelegate;
 @property (nonatomic) BOOL isTakingSurvey;
 - (void)setSplashScreenLogo:(UIImage * _Nonnull)logo;
@@ -731,27 +933,39 @@ SWIFT_CLASS_NAMED("SurveysModule")
 
 
 
+@class VariablesModule;
+@protocol UserWiseMediaInfoDelegate;
 
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 @property (nonatomic, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, strong) OffersModule * _Nullable offersModule;
+@property (nonatomic, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
 @property (nonatomic, copy) NSString * _Nullable userId;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
-+ (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId SWIFT_WARN_UNUSED_RESULT;
 - (void)onStart;
 - (void)onStop;
 - (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
 - (void)forcePollRequest;
 - (BOOL)isAnyContentActive SWIFT_WARN_UNUSED_RESULT;
+- (void)getMediaWithMediaId:(NSString * _Nonnull)mediaId handler:(id <UserWiseMediaInfoDelegate> _Nonnull)handler;
 - (void)assignEvent:(NSString * _Nonnull)eventName attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
 - (void)setAttributes:(NSDictionary<NSString *, id> * _Nonnull)attributes;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
++ (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseMediaInfoDelegate")
+@protocol UserWiseMediaInfoDelegate
+- (void)onSuccessWithMediaInfo:(MediaInfo * _Nonnull)mediaInfo;
+- (void)onFailure;
 @end
 
 
@@ -768,13 +982,13 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 /// Called when an offer impression has been successfully initialized
 - (void)onOfferImpressionInitialized:(OfferImpression * _Nonnull)offerImpression;
 /// Called once the offer’s WebView has successfully loaded, and is being displayed
-- (void)onOfferViewedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferViewedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called if UserWise failed to load the offer
-- (void)onOfferViewAttemptFailedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression reason:(enum OfferViewAttemptFailedReason)reason;
+- (void)onOfferViewAttemptFailedWithOfferImpression:(OfferImpression * _Nullable)offerImpression reason:(enum OfferViewAttemptFailedReason)reason;
 /// Called when the offer WebView has been dismissed (only when <em>NOT</em> accepted);
-- (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called whent he offer WebView accept CTA has been tapped.
-- (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 @end
 
 
@@ -803,10 +1017,40 @@ SWIFT_CLASS_NAMED("UserWiseUtility")
 + (NSString * _Nullable)getOsVersion SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)getPhoneCarrier SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getDeviceType SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getTimeZoneIdentifier SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getIDFA SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getLanguage SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)getConnectionType SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseVariablesDelegate")
+@protocol UserWiseVariablesDelegate
+- (void)onVariablesInitialized;
+@end
+
+
+typedef SWIFT_ENUM_NAMED(NSInteger, VariableType, "VariableType", open) {
+  VariableTypeString = 0,
+  VariableTypeInteger = 1,
+  VariableTypeFloat = 2,
+  VariableTypeDatetime = 3,
+  VariableTypeBoolean = 4,
+  VariableTypeFile = 5,
+};
+
+
+SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
+@interface VariablesModule : NSObject
+@property (nonatomic, strong) id <UserWiseVariablesDelegate> _Nullable variablesDelegate;
+- (Variable * _Nullable)getVariableDefinitionWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)defineWithVariables:(NSArray<Variable *> * _Nonnull)variables error:(NSError * _Nullable * _Nullable)error;
+- (Variable * _Nullable)defineVariableWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (Variable * _Nullable)define:(Variable * _Nonnull)variable error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getModuleName SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 #if __has_attribute(external_source_symbol)
@@ -1026,6 +1270,68 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+enum VariableType : NSInteger;
+
+SWIFT_CLASS_NAMED("Variable")
+@interface Variable : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum VariableType type;
+@property (nonatomic, readonly) id _Nullable defaultValue;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("BooleanVariable")
+@interface BooleanVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(BOOL)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (BOOL)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("DatetimeVariable")
+@interface DatetimeVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSDate * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSDate * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("FileVariable")
+@interface FileVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("FloatVariable")
+@interface FloatVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(float)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (float)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("IntegerVariable")
+@interface IntegerVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSInteger)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSInteger)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS_NAMED("MediaInfo")
+@interface MediaInfo : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull contentType;
+@property (nonatomic, readonly, copy) NSString * _Nonnull url;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 
 SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
@@ -1064,7 +1370,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, OfferImpressionState, "OfferImpressionState"
 
 SWIFT_CLASS("_TtC11UserWiseSDK20OfferPopupController")
 @interface OfferPopupController : UIViewController
-+ (OfferPopupController * _Nonnull)loadControllerWithOfferImpression:(OfferImpression * _Nonnull)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
++ (OfferPopupController * _Nonnull)loadControllerWithOfferImpression:(OfferImpression * _Nullable)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
 - (void)loadView;
 - (void)viewDidLoad;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -1072,6 +1378,15 @@ SWIFT_CLASS("_TtC11UserWiseSDK20OfferPopupController")
 @end
 
 
+
+
+SWIFT_CLASS_NAMED("OfferPopupManager")
+@interface OfferPopupManager : NSObject
++ (OfferPopupController * _Nullable)showOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression offerUrl:(NSString * _Nonnull)offerUrl SWIFT_WARN_UNUSED_RESULT;
++ (void)hideOffer;
++ (BOOL)isAnOfferDisplayed SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, OfferViewAttemptFailedReason, "OfferViewAttemptFailedReason", open) {
   OfferViewAttemptFailedReasonOfferAlreadyActive = 0,
@@ -1089,10 +1404,18 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 - (void)initializeOfferImpressionWithOfferId:(NSString * _Nonnull)offerId;
 - (void)updateOfferImpressionStateWithOfferImpression:(OfferImpression * _Nonnull)offerImpression newState:(enum OfferImpressionState)newState;
 - (void)showOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
-- (void)dismissOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
-- (void)acceptOfferWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)dismissOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
+- (void)acceptOfferWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("StringVariable")
+@interface StringVariable : Variable
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
 
 @class UIColor;
@@ -1126,6 +1449,7 @@ SWIFT_CLASS("_TtC11UserWiseSDK23SurveyWebViewController")
 /// Central interface used when working with UserWise surveys & polls..
 SWIFT_CLASS_NAMED("SurveysModule")
 @interface SurveysModule : NSObject
+@property (nonatomic, readonly, strong) SurveySplashScreenStyles * _Nonnull styleConfiguration;
 @property (nonatomic, strong) id <UserWiseSurveyDelegate> _Nullable surveyDelegate;
 @property (nonatomic) BOOL isTakingSurvey;
 - (void)setSplashScreenLogo:(UIImage * _Nonnull)logo;
@@ -1139,27 +1463,39 @@ SWIFT_CLASS_NAMED("SurveysModule")
 
 
 
+@class VariablesModule;
+@protocol UserWiseMediaInfoDelegate;
 
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 @property (nonatomic, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, strong) OffersModule * _Nullable offersModule;
+@property (nonatomic, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
 @property (nonatomic, copy) NSString * _Nullable userId;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
-+ (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId SWIFT_WARN_UNUSED_RESULT;
 - (void)onStart;
 - (void)onStop;
 - (BOOL)isInitialized SWIFT_WARN_UNUSED_RESULT;
 - (void)forcePollRequest;
 - (BOOL)isAnyContentActive SWIFT_WARN_UNUSED_RESULT;
+- (void)getMediaWithMediaId:(NSString * _Nonnull)mediaId handler:(id <UserWiseMediaInfoDelegate> _Nonnull)handler;
 - (void)assignEvent:(NSString * _Nonnull)eventName attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
 - (void)setAttributes:(NSDictionary<NSString *, id> * _Nonnull)attributes;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
++ (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseMediaInfoDelegate")
+@protocol UserWiseMediaInfoDelegate
+- (void)onSuccessWithMediaInfo:(MediaInfo * _Nonnull)mediaInfo;
+- (void)onFailure;
 @end
 
 
@@ -1176,13 +1512,13 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 /// Called when an offer impression has been successfully initialized
 - (void)onOfferImpressionInitialized:(OfferImpression * _Nonnull)offerImpression;
 /// Called once the offer’s WebView has successfully loaded, and is being displayed
-- (void)onOfferViewedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferViewedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called if UserWise failed to load the offer
-- (void)onOfferViewAttemptFailedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression reason:(enum OfferViewAttemptFailedReason)reason;
+- (void)onOfferViewAttemptFailedWithOfferImpression:(OfferImpression * _Nullable)offerImpression reason:(enum OfferViewAttemptFailedReason)reason;
 /// Called when the offer WebView has been dismissed (only when <em>NOT</em> accepted);
-- (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called whent he offer WebView accept CTA has been tapped.
-- (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nonnull)offerImpression;
+- (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 @end
 
 
@@ -1211,10 +1547,40 @@ SWIFT_CLASS_NAMED("UserWiseUtility")
 + (NSString * _Nullable)getOsVersion SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)getPhoneCarrier SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getDeviceType SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getTimeZoneIdentifier SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getIDFA SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nonnull)getLanguage SWIFT_WARN_UNUSED_RESULT;
 + (NSString * _Nullable)getConnectionType SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseVariablesDelegate")
+@protocol UserWiseVariablesDelegate
+- (void)onVariablesInitialized;
+@end
+
+
+typedef SWIFT_ENUM_NAMED(NSInteger, VariableType, "VariableType", open) {
+  VariableTypeString = 0,
+  VariableTypeInteger = 1,
+  VariableTypeFloat = 2,
+  VariableTypeDatetime = 3,
+  VariableTypeBoolean = 4,
+  VariableTypeFile = 5,
+};
+
+
+SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
+@interface VariablesModule : NSObject
+@property (nonatomic, strong) id <UserWiseVariablesDelegate> _Nullable variablesDelegate;
+- (Variable * _Nullable)getVariableDefinitionWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)defineWithVariables:(NSArray<Variable *> * _Nonnull)variables error:(NSError * _Nullable * _Nullable)error;
+- (Variable * _Nullable)defineVariableWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (Variable * _Nullable)define:(Variable * _Nonnull)variable error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getModuleName SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 #if __has_attribute(external_source_symbol)
