@@ -55,7 +55,7 @@
     
     if (![self.userWise isInitialized]) {
         [self.userWise setDebugMode:YES];
-        [self.userWise setHostOverride:[NSURL URLWithString:@"http://192.168.1.163:3000"]];
+        [self.userWise setHostOverride:[NSURL URLWithString:@"https://staging.userwise.io"]];
         [self.userWise setApiKey:@"f1535363ad9ab340ebc9786337b0"];
         [self.userWise setUserId:@"userwise-demo-ios-user"];
         
