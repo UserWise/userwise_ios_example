@@ -9,15 +9,15 @@
     return delegate;
 }
 
-- (void)onSurveysUnavailable {
-    [self.controller.view makeToast:@"No surveys are available to take."];
+- (void)onSurveysLoaded {
+    
 }
 
-- (void)onSurveyAvailableWithResponseId:(NSString * _Nonnull)responseId {
-    [self.userWise.surveysModule initializeSurveyInviteWithResponseId:responseId];
+- (void)onSurveyAvailableWithSurvey:(Survey * _Nonnull)survey {
+    [self.userWise.surveysModule initializeSurveyInviteWithSurvey:survey];
 }
 
-- (void)onSurveyInviteInitializedWithWasInitialized:(BOOL)wasInitialized responseId:(NSString * _Nullable)responseId inviteId:(NSString * _Nullable)inviteId {
+- (void)onSurveyInviteInitializedWithSurvey:(Survey * _Nonnull)survey wasInitialized:(BOOL)wasInitialized responseId:(NSString * _Nullable)responseId inviteId:(NSString * _Nullable)inviteId {
     
     if (!wasInitialized) { return; }
 

@@ -9,6 +9,7 @@
 
 @property NSString *responseId;
 @property NSString *inviteId;
+@property Survey *survey;
 @property UserWise *userWise;
 
 @property (weak) IBOutlet UIButton *offerAcceptBtn;

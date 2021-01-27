@@ -15,12 +15,12 @@
 }
 
 - (IBAction)clickOfferClose:(id)sender {
-    [self.userWise.surveysModule setSurveyInviteResponseWithResponseId:[self responseId] inviteId:[self inviteId] wasAccepted:NO];
+    [self.userWise.surveysModule setSurveyInviteResponseWithSurvey:self.survey responseId:self.responseId inviteId:self.inviteId wasAccepted:NO];
     [self dismissSurveyOfferView];
 }
 
 - (IBAction)clickOfferAccept:(id)sender {
-    [self.userWise.surveysModule setSurveyInviteResponseWithResponseId:[self responseId] inviteId:[self inviteId] wasAccepted:YES];
+    [self.userWise.surveysModule setSurveyInviteResponseWithSurvey:self.survey responseId:self.responseId inviteId:self.inviteId wasAccepted:YES];
     [self dismissSurveyOfferView];
 }
 
