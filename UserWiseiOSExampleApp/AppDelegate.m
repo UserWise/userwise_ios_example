@@ -34,7 +34,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     if (![self.userWise isSessionInitialized]) {
         [self.userWise setDebugMode:YES];
         [self.userWise setHostOverride:[NSURL URLWithString:@"http://localhost:3000"]];
-        [self.userWise setApiKey:@"f1535363ad9ab340ebc9786337b0"];
+        [self.userWise setApiKey:@"1ce8092b0732d711e7c22108b2cd"];
         [self.userWise setUserId:@"userwise-demo-ios-user"];
         
         // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
@@ -61,6 +61,9 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // OffersModule Configuration
     [self.userWise.offersModule setOfferDelegate:[ExampleOfferDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
+    
+    // MessagesModule Configuration
+    [self.userWise.messagesModule setMessageDelegate:[ExampleMessageDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
 
     // Finally, you can assign your app user attributes and events directly within the SDK!
     //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
