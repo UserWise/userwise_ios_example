@@ -334,6 +334,44 @@ SWIFT_CLASS_NAMED("MediaVariant")
 @end
 
 
+SWIFT_CLASS_NAMED("Message")
+@interface Message : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+@property (nonatomic, readonly, copy) NSString * _Nonnull body;
+@property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull additionalFields;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@protocol UserWiseMessageDelegate;
+
+/// MessagesModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("MessagesModule")
+@interface MessagesModule : NSObject
+@property (nonatomic, strong) id <UserWiseMessageDelegate> _Nullable messageDelegate;
+- (NSArray<Message *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<Message *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
+- (Message * _Nullable)getMessageById:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
+- (void)setMessageAsViewedWithMessage:(Message * _Nonnull)message;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@interface MessagesModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStop;
+@end
+
+
 SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
@@ -515,6 +553,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, copy) NSArray<id <UserWiseStateDelegate>> * _Nonnull stateDelegates;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
+@property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly) BOOL isRunning;
@@ -563,6 +602,15 @@ SWIFT_PROTOCOL_NAMED("UserWiseMediaRawDataHandler")
 @protocol UserWiseMediaRawDataHandler
 - (void)onMediaDownloadSuccessWithData:(NSData * _Nonnull)data;
 - (void)onMediaDownloadFailure;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseMessageDelegate")
+@protocol UserWiseMessageDelegate
+/// Called once message(s) have been loaded from either the API or local cache
+- (void)onMessagesLoadedFromCache:(BOOL)fromCache;
+/// Called when message(s) are available for the appuser.
+- (void)onMessageAvailableWithMessage:(Message * _Nonnull)message;
 @end
 
 
@@ -654,9 +702,9 @@ SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
 
 
 @interface VariablesModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
 - (void)onSessionInitializationAttemptFailed;
 - (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
-- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
 - (void)onStop;
 @end
 
@@ -1001,6 +1049,44 @@ SWIFT_CLASS_NAMED("MediaVariant")
 @end
 
 
+SWIFT_CLASS_NAMED("Message")
+@interface Message : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+@property (nonatomic, readonly, copy) NSString * _Nonnull body;
+@property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull additionalFields;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@protocol UserWiseMessageDelegate;
+
+/// MessagesModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("MessagesModule")
+@interface MessagesModule : NSObject
+@property (nonatomic, strong) id <UserWiseMessageDelegate> _Nullable messageDelegate;
+- (NSArray<Message *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<Message *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
+- (Message * _Nullable)getMessageById:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
+- (void)setMessageAsViewedWithMessage:(Message * _Nonnull)message;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@interface MessagesModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStop;
+@end
+
+
 SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
@@ -1182,6 +1268,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, copy) NSArray<id <UserWiseStateDelegate>> * _Nonnull stateDelegates;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
+@property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly) BOOL isRunning;
@@ -1230,6 +1317,15 @@ SWIFT_PROTOCOL_NAMED("UserWiseMediaRawDataHandler")
 @protocol UserWiseMediaRawDataHandler
 - (void)onMediaDownloadSuccessWithData:(NSData * _Nonnull)data;
 - (void)onMediaDownloadFailure;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseMessageDelegate")
+@protocol UserWiseMessageDelegate
+/// Called once message(s) have been loaded from either the API or local cache
+- (void)onMessagesLoadedFromCache:(BOOL)fromCache;
+/// Called when message(s) are available for the appuser.
+- (void)onMessageAvailableWithMessage:(Message * _Nonnull)message;
 @end
 
 
@@ -1321,9 +1417,9 @@ SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
 
 
 @interface VariablesModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
 - (void)onSessionInitializationAttemptFailed;
 - (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
-- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
 - (void)onStop;
 @end
 

@@ -11,6 +11,12 @@
 #endif
 
 @interface ViewController : UIViewController
+@property UserWise *userWise;
 @property (weak) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITextField *userIdField;
+@property (weak, nonatomic) IBOutlet UIButton *changeUserBtn;
+
+- (IBAction)changeUser:(id)sender;
+
 @end
 

@@ -25,19 +25,18 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self.userWise onStop];
+    if ([self.userWise isRunning]) {
+        [self.userWise onStop];
+    }
 }
 
 - (void)initializeUserWiseSDK {
     self.userWise = [UserWise sharedInstance];
     
-    if (![self.userWise isSessionInitialized]) {
+    if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
         [self.userWise setHostOverride:[NSURL URLWithString:@"http://localhost:3000"]];
-        [self.userWise setApiKey:@"1ce8092b0732d711e7c22108b2cd"];
-        [self.userWise setUserId:@"userwise-demo-ios-user"];
-        
-        // or: [self.userWise initializeWithApiKey:(NSString* _Nonnull) userId:(NSString* _Nonnull)];
+        [self.userWise setApiKey:@"f1535363ad9ab340ebc9786337b0"];
     }
     
     // VariablesModule Configuration *must* be configured prior to calling onStart
@@ -52,7 +51,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self.userWise.variablesModule defineWithVariables:@[self.maxLevelVar, self.enableThingAVar, self.startThisThingAtVar, self.titleVar, self.descriptionVar, self.exchangeRateVar, self.headerImageVar] error:nil];
     
     self.userWise.variablesModule.variablesDelegate = self;
-    [self.userWise onStart];
 
     // SurveysModule Configuration
     [self.userWise.surveysModule setSurveyDelegate:[ExampleSurveyDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];

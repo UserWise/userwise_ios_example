@@ -48,6 +48,21 @@ public typealias UserWiseSDKResponseData = Swift.Decodable
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
+@_hasMissingDesignatedInitializers @objc(MessagesModule) public class MessagesModule : ObjectiveC.NSObject {
+  @objc(messageDelegate) public var messageDelegate: UserWiseSDK.UserWiseMessageDelegate?
+  @objc public func getAllActive() -> Swift.Array<UserWiseSDK.Message>
+  @objc public func getAllUpcoming() -> Swift.Array<UserWiseSDK.Message>
+  @objc public func getMessageBy(id: Swift.String) -> UserWiseSDK.Message?
+  @objc public func setMessageAsViewed(message: UserWiseSDK.Message)
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension MessagesModule : UserWiseSDK.UserWiseStateDelegate {
+  @objc dynamic public func onSessionInitializationAttemptFailed()
+  @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
+  @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
+  @objc dynamic public func onStop()
+}
 public enum VariablesError : Swift.Error {
   case redefinition
   public static func == (a: UserWiseSDK.VariablesError, b: UserWiseSDK.VariablesError) -> Swift.Bool
@@ -72,9 +87,9 @@ extension VariablesError : Foundation.LocalizedError {
   @objc override dynamic public init()
 }
 extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
+  @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
   @objc dynamic public func onSessionInitializationAttemptFailed()
   @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
-  @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
   @objc dynamic public func onStop()
 }
 @_hasMissingDesignatedInitializers @objc(UserWise) public class UserWise : ObjectiveC.NSObject {
@@ -84,6 +99,9 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
     get
   }
   @objc(offersModule) public var offersModule: UserWiseSDK.OffersModule? {
+    get
+  }
+  @objc(messagesModule) public var messagesModule: UserWiseSDK.MessagesModule? {
     get
   }
   @objc(variablesModule) public var variablesModule: UserWiseSDK.VariablesModule? {
@@ -244,6 +262,10 @@ extension UIDevice {
   @objc deinit
   @objc override public init(name: Swift.String, type: UserWiseSDK.VariableType, defaultValue: Any?)
 }
+@objc(UserWiseMessageDelegate) public protocol UserWiseMessageDelegate {
+  @objc func onMessagesLoaded(fromCache: Swift.Bool)
+  @objc func onMessageAvailable(message: UserWiseSDK.Message)
+}
 @_hasMissingDesignatedInitializers @objc public class OffersModule : ObjectiveC.NSObject {
   @objc(offerDelegate) public var offerDelegate: UserWiseSDK.UserWiseOfferDelegate?
   @objc public func getAllActive() -> Swift.Array<UserWiseSDK.Offer>
@@ -388,6 +410,19 @@ extension SurveysModule : UserWiseSDK.UserWiseStateDelegate {
   @objc public static func getIDFA() -> Swift.String
   @objc public static func getLanguage() -> Swift.String
   @objc public static func getConnectionType() -> Swift.String?
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc(Message) public class Message : ObjectiveC.NSObject, Swift.Codable {
+  @objc(id) final public let id: Swift.String
+  @objc(name) final public let name: Swift.String
+  @objc(title) final public let title: Swift.String
+  @objc(body) final public let body: Swift.String
+  @objc(portraitImageId) final public let portraitImageId: Swift.String
+  @objc(landscapeImageId) final public let landscapeImageId: Swift.String
+  @objc(additionalFields) final public let additionalFields: [Swift.String : Any]
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
   @objc override dynamic public init()
 }

@@ -9,8 +9,8 @@
     return delegate;
 }
 
-- (void)onMessagesLoaded {
-    NSLog(@"Messages have been loaded from the server");
+- (void)onMessagesLoadedFromCache:(BOOL)fromCache {
+    NSLog([NSString stringWithFormat: @"Messages have been loaded.  From cache? %@", fromCache == TRUE ? @"Yes" : @"No"]);
 }
 
 - (void)onMessageAvailableWithMessage:(Message *)message {
