@@ -376,9 +376,14 @@ SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+@property (nonatomic, readonly, copy) NSString * _Nonnull body;
+@property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
 @property (nonatomic, readonly) double cost;
 @property (nonatomic, readonly, copy) NSString * _Nonnull iOSProductId;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull currencies;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull items;
 @property (nonatomic, readonly, copy) NSDate * _Nullable start_at;
 @property (nonatomic, readonly, copy) NSString * _Nonnull start_at_tz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable end_at;
@@ -1091,9 +1096,14 @@ SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+@property (nonatomic, readonly, copy) NSString * _Nonnull body;
+@property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
 @property (nonatomic, readonly) double cost;
 @property (nonatomic, readonly, copy) NSString * _Nonnull iOSProductId;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull currencies;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull items;
 @property (nonatomic, readonly, copy) NSDate * _Nullable start_at;
 @property (nonatomic, readonly, copy) NSString * _Nonnull start_at_tz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable end_at;
@@ -1806,9 +1816,14 @@ SWIFT_CLASS_NAMED("Offer")
 @interface Offer : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull id;
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull title;
+@property (nonatomic, readonly, copy) NSString * _Nonnull body;
+@property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
 @property (nonatomic, readonly) double cost;
 @property (nonatomic, readonly, copy) NSString * _Nonnull iOSProductId;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull currencies;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull items;
 @property (nonatomic, readonly, copy) NSDate * _Nullable start_at;
 @property (nonatomic, readonly, copy) NSString * _Nonnull start_at_tz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable end_at;

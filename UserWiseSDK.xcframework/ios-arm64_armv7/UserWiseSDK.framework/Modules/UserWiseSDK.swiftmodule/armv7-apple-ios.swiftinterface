@@ -165,9 +165,14 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
 @objc(Offer) public class Offer : ObjectiveC.NSObject, Swift.Codable {
   @objc(id) final public let id: Swift.String
   @objc(name) final public let name: Swift.String
+  @objc(title) final public let title: Swift.String
+  @objc(body) final public let body: Swift.String
+  @objc(portraitImageId) final public let portraitImageId: Swift.String
+  @objc(landscapeImageId) final public let landscapeImageId: Swift.String
   @objc(cost) final public let cost: Swift.Double
   @objc(iOSProductId) final public let ios_product_id: Swift.String
   @objc(currencies) final public let currencies: [Swift.String : Swift.Int]
+  @objc(items) final public let items: [Swift.String : Swift.Int]
   @objc final public let start_at: Foundation.Date?
   @objc final public let start_at_tz: Swift.String
   @objc final public let end_at: Foundation.Date?

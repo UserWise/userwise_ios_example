@@ -27,13 +27,14 @@
 - (void)onOfferImpressionInitialized:(OfferImpression *)offerImpression {
     NSLog(@"Offer impression successfully initialized. offer_impression_id=%@", offerImpression.id);
     
-    NSString *productId = offerImpression.offer.iOSProductId;
-    double cost = offerImpression.offer.cost;
-    NSDictionary<NSString *, NSNumber *> *bundleContent = offerImpression.offer.currencies;
-    
-    NSLog(@"Offer Product ID: %@", productId);
-    NSLog(@"Offer Cost: %.02f", cost);
-    NSLog(@"Bundle Contains: \n %@", bundleContent);
+    NSLog(@"Offer Title: %@", offerImpression.offer.title);
+    NSLog(@"Offer Body: %@", offerImpression.offer.body);
+    NSLog(@"Offer Portrait Image ID: %@", offerImpression.offer.portraitImageId);
+    NSLog(@"Offer Landscape Image ID: %@", offerImpression.offer.landscapeImageId);
+    NSLog(@"Offer Product ID: %@", offerImpression.offer.iOSProductId);
+    NSLog(@"Offer Cost: %.02f", offerImpression.offer.cost);
+    NSLog(@"Bundled Currencies: \n %@", offerImpression.offer.currencies);
+    NSLog(@"Bundled Items: \n %@", offerImpression.offer.items);
 
     // Once an offer has been accepted the itself impression will stay in a state of "accepted"
     // on the UserWise servers.  There are currently two possible states beyond "accepted":
