@@ -13,7 +13,8 @@
 		187D8E81246B3A34001F0B10 /* SurveyOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D8E80246B3A34001F0B10 /* SurveyOfferViewController.m */; };
 		189364A22562DF2D00044B82 /* ExampleSurveyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */; };
 		189364A52562E2E200044B82 /* ExampleOfferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A42562E2E200044B82 /* ExampleOfferDelegate.m */; };
-		18B8F2A225BF6ADA009DE6B3 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; };
+		18CE373425F7DE9200BA1891 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; };
+		18CE373525F7DE9200BA1891 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18F2FEFD25CC6114005F456C /* ExampleMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F2FEFC25CC6114005F456C /* ExampleMessageDelegate.m */; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
 		724E77E61EF14C6500271C2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E51EF14C6500271C2F /* main.m */; };
@@ -39,6 +40,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				18CE373525F7DE9200BA1891 /* UserWiseSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,7 +97,7 @@
 				724E78051EF14CE800271C2F /* JavaScriptCore.framework in Frameworks */,
 				724E78031EF14CDE00271C2F /* Foundation.framework in Frameworks */,
 				7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */,
-				18B8F2A225BF6ADA009DE6B3 /* UserWiseSDK.xcframework in Frameworks */,
+				18CE373425F7DE9200BA1891 /* UserWiseSDK.xcframework in Frameworks */,
 				724E78011EF14CD700271C2F /* CoreTelephony.framework in Frameworks */,
 				724E77FF1EF14CCE00271C2F /* AdSupport.framework in Frameworks */,
 			);
