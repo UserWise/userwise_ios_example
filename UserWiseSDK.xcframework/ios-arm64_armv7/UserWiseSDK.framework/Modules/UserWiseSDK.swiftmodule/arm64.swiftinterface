@@ -110,6 +110,9 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
   @objc(eventsModule) public var eventsModule: UserWiseSDK.EventsModule? {
     get
   }
+  @objc(pushNotificationsModule) public var pushNotificationsModule: UserWiseSDK.PushNotificationsModule? {
+    get
+  }
   @objc(isRunning) public var isRunning: Swift.Bool {
     get
   }
@@ -147,6 +150,12 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
 @objc(UserWiseEventDelegate) public protocol UserWiseEventDelegate {
   @objc func onEventsLoaded(fromCache: Swift.Bool)
   @objc func onEventActive(event: UserWiseSDK.GameEvent)
+}
+@_hasMissingDesignatedInitializers @objc(PushNotificationsModule) public class PushNotificationsModule : ObjectiveC.NSObject {
+  @objc public func registerToken(token: Swift.String)
+  @objc public func handleNotification(data: [Swift.AnyHashable : Any])
+  @objc override dynamic public init()
+  @objc deinit
 }
 @objc(OfferImpressionState) public enum OfferImpressionState : Swift.Int, Swift.RawRepresentable, Swift.Codable {
   case Initialized = 0

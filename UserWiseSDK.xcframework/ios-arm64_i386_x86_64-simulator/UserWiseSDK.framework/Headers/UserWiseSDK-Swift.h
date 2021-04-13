@@ -470,6 +470,17 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 @end
 
 
+/// PushNotificationsModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("PushNotificationsModule")
+@interface PushNotificationsModule : NSObject
+- (void)registerTokenWithToken:(NSString * _Nonnull)token;
+- (void)handleNotificationWithData:(NSDictionary * _Nonnull)data;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -561,6 +572,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
+@property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
@@ -1190,6 +1202,17 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 @end
 
 
+/// PushNotificationsModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("PushNotificationsModule")
+@interface PushNotificationsModule : NSObject
+- (void)registerTokenWithToken:(NSString * _Nonnull)token;
+- (void)handleNotificationWithData:(NSDictionary * _Nonnull)data;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -1281,6 +1304,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
+@property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
@@ -1910,6 +1934,17 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 @end
 
 
+/// PushNotificationsModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("PushNotificationsModule")
+@interface PushNotificationsModule : NSObject
+- (void)registerTokenWithToken:(NSString * _Nonnull)token;
+- (void)handleNotificationWithData:(NSDictionary * _Nonnull)data;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -2001,6 +2036,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
+@property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;

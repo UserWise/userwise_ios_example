@@ -13,8 +13,6 @@
 		187D8E81246B3A34001F0B10 /* SurveyOfferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D8E80246B3A34001F0B10 /* SurveyOfferViewController.m */; };
 		189364A22562DF2D00044B82 /* ExampleSurveyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */; };
 		189364A52562E2E200044B82 /* ExampleOfferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A42562E2E200044B82 /* ExampleOfferDelegate.m */; };
-		18CE373425F7DE9200BA1891 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; };
-		18CE373525F7DE9200BA1891 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18F2FEFD25CC6114005F456C /* ExampleMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F2FEFC25CC6114005F456C /* ExampleMessageDelegate.m */; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
 		724E77E61EF14C6500271C2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E51EF14C6500271C2F /* main.m */; };
@@ -31,6 +29,15 @@
 		724E78091EF14CF600271C2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724E78081EF14CF600271C2F /* SystemConfiguration.framework */; };
 		724E780B1EF14CFC00271C2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724E780A1EF14CFC00271C2F /* UIKit.framework */; };
 		724E780D1EF14D0300271C2F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724E780C1EF14D0300271C2F /* WebKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		B5ACD65B26265164006ED502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5ACD65A26265164006ED502 /* GoogleService-Info.plist */; };
+		B5ACD662262651AE006ED502 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD65E262651AE006ED502 /* PromisesObjC.xcframework */; };
+		B5ACD663262651AE006ED502 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD65F262651AE006ED502 /* FirebaseCore.xcframework */; };
+		B5ACD664262651AE006ED502 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD660262651AE006ED502 /* FirebaseInstallations.xcframework */; };
+		B5ACD665262651AE006ED502 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD661262651AE006ED502 /* GoogleUtilities.xcframework */; };
+		B5ACD668262651B8006ED502 /* FirebaseMessaging.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD666262651B8006ED502 /* FirebaseMessaging.xcframework */; };
+		B5ACD669262651B8006ED502 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD667262651B8006ED502 /* FirebaseInstanceID.xcframework */; };
+		B5ACD66C26265D14006ED502 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD66A26265CF8006ED502 /* UserWiseSDK.xcframework */; };
+		B5ACD66D26265D14006ED502 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5ACD66A26265CF8006ED502 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +47,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				18CE373525F7DE9200BA1891 /* UserWiseSDK.xcframework in Embed Frameworks */,
+				B5ACD66D26265D14006ED502 /* UserWiseSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,7 +67,6 @@
 		189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleSurveyDelegate.m; sourceTree = "<group>"; };
 		189364A42562E2E200044B82 /* ExampleOfferDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleOfferDelegate.m; sourceTree = "<group>"; };
 		189364A62562E2F100044B82 /* ExampleOfferDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleOfferDelegate.h; sourceTree = "<group>"; };
-		18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserWiseSDK.xcframework; sourceTree = "<group>"; };
 		18F2FEFB25CC6114005F456C /* ExampleMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleMessageDelegate.h; sourceTree = "<group>"; };
 		18F2FEFC25CC6114005F456C /* ExampleMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleMessageDelegate.m; sourceTree = "<group>"; };
 		7239634E20273F7300702509 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
@@ -83,6 +89,16 @@
 		724E78081EF14CF600271C2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		724E780A1EF14CFC00271C2F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		724E780C1EF14D0300271C2F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		B5ACD65A26265164006ED502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B5ACD65C2626516D006ED502 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
+		B5ACD65D26265175006ED502 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		B5ACD65E262651AE006ED502 /* PromisesObjC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PromisesObjC.xcframework; path = ../../Desktop/Firebase/FirebaseAnalytics/PromisesObjC.xcframework; sourceTree = "<group>"; };
+		B5ACD65F262651AE006ED502 /* FirebaseCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FirebaseCore.xcframework; path = ../../Desktop/Firebase/FirebaseAnalytics/FirebaseCore.xcframework; sourceTree = "<group>"; };
+		B5ACD660262651AE006ED502 /* FirebaseInstallations.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FirebaseInstallations.xcframework; path = ../../Desktop/Firebase/FirebaseAnalytics/FirebaseInstallations.xcframework; sourceTree = "<group>"; };
+		B5ACD661262651AE006ED502 /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleUtilities.xcframework; path = ../../Desktop/Firebase/FirebaseAnalytics/GoogleUtilities.xcframework; sourceTree = "<group>"; };
+		B5ACD666262651B8006ED502 /* FirebaseMessaging.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseMessaging.xcframework; sourceTree = "<group>"; };
+		B5ACD667262651B8006ED502 /* FirebaseInstanceID.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FirebaseInstanceID.xcframework; path = ../../Desktop/Firebase/FirebaseMessaging/FirebaseInstanceID.xcframework; sourceTree = "<group>"; };
+		B5ACD66A26265CF8006ED502 /* UserWiseSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserWiseSDK.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,15 +107,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				724E780D1EF14D0300271C2F /* WebKit.framework in Frameworks */,
+				B5ACD663262651AE006ED502 /* FirebaseCore.xcframework in Frameworks */,
 				724E780B1EF14CFC00271C2F /* UIKit.framework in Frameworks */,
 				724E78091EF14CF600271C2F /* SystemConfiguration.framework in Frameworks */,
+				B5ACD668262651B8006ED502 /* FirebaseMessaging.xcframework in Frameworks */,
+				B5ACD664262651AE006ED502 /* FirebaseInstallations.xcframework in Frameworks */,
 				724E78071EF14CEE00271C2F /* Security.framework in Frameworks */,
+				B5ACD66C26265D14006ED502 /* UserWiseSDK.xcframework in Frameworks */,
 				724E78051EF14CE800271C2F /* JavaScriptCore.framework in Frameworks */,
+				B5ACD669262651B8006ED502 /* FirebaseInstanceID.xcframework in Frameworks */,
 				724E78031EF14CDE00271C2F /* Foundation.framework in Frameworks */,
 				7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */,
-				18CE373425F7DE9200BA1891 /* UserWiseSDK.xcframework in Frameworks */,
+				B5ACD665262651AE006ED502 /* GoogleUtilities.xcframework in Frameworks */,
 				724E78011EF14CD700271C2F /* CoreTelephony.framework in Frameworks */,
 				724E77FF1EF14CCE00271C2F /* AdSupport.framework in Frameworks */,
+				B5ACD662262651AE006ED502 /* PromisesObjC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +219,9 @@
 				724E77F51EF14C6500271C2F /* Info.plist */,
 				724E77E41EF14C6500271C2F /* Supporting Files */,
 				724E77F01EF14C6500271C2F /* Assets.xcassets */,
+				B5ACD65A26265164006ED502 /* GoogleService-Info.plist */,
+				B5ACD65C2626516D006ED502 /* Firebase.h */,
+				B5ACD65D26265175006ED502 /* module.modulemap */,
 			);
 			path = UserWiseiOSExampleApp;
 			sourceTree = "<group>";
@@ -212,8 +237,14 @@
 		724E77FD1EF14CCD00271C2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B5ACD65F262651AE006ED502 /* FirebaseCore.xcframework */,
+				B5ACD660262651AE006ED502 /* FirebaseInstallations.xcframework */,
+				B5ACD661262651AE006ED502 /* GoogleUtilities.xcframework */,
+				B5ACD65E262651AE006ED502 /* PromisesObjC.xcframework */,
+				B5ACD667262651B8006ED502 /* FirebaseInstanceID.xcframework */,
+				B5ACD666262651B8006ED502 /* FirebaseMessaging.xcframework */,
 				18809DB724C0A22D00798FA2 /* AppTrackingTransparency.framework */,
-				18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */,
+				B5ACD66A26265CF8006ED502 /* UserWiseSDK.xcframework */,
 				7239634E20273F7300702509 /* ExternalAccessory.framework */,
 				724E780C1EF14D0300271C2F /* WebKit.framework */,
 				724E780A1EF14CFC00271C2F /* UIKit.framework */,
@@ -294,6 +325,7 @@
 			files = (
 				187D8E7B246B3123001F0B10 /* SurveyOfferView.xib in Resources */,
 				724E77F41EF14C6500271C2F /* LaunchScreen.storyboard in Resources */,
+				B5ACD65B26265164006ED502 /* GoogleService-Info.plist in Resources */,
 				724E77F11EF14C6500271C2F /* Assets.xcassets in Resources */,
 				724E77EF1EF14C6500271C2F /* Main.storyboard in Resources */,
 			);
@@ -470,9 +502,13 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.userwise.UserWiseDemoApp;
 				PRODUCT_NAME = "UserWise Demo App";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Debug;
 		};
@@ -494,9 +530,13 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.userwise.UserWiseDemoApp;
 				PRODUCT_NAME = "UserWise Demo App";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Release;
 		};
