@@ -210,6 +210,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+/// Enumeration of possible UserWise data types that can be used for attributable actions;
+/// (e.g. player attribute updates, new player events, or transitioning to a new region).
+typedef SWIFT_ENUM_NAMED(NSInteger, AttributableDataType, "AttributableDataType", open) {
+  AttributableDataTypeString = 0,
+  AttributableDataTypeInteger = 1,
+  AttributableDataTypeFloat = 2,
+  AttributableDataTypeDatetime = 3,
+  AttributableDataTypeBoolean = 4,
+  AttributableDataTypeFile = 5,
+};
+
 enum VariableType : NSInteger;
 
 SWIFT_CLASS_NAMED("Variable")
@@ -230,6 +241,33 @@ SWIFT_CLASS_NAMED("BooleanVariable")
 - (BOOL)getValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
+
+
+/// EventsModule
+/// Central interface used when working with UserWise events.
+SWIFT_CLASS("_TtC11UserWiseSDK15CampaignsModule")
+@interface CampaignsModule : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseStateDelegate")
+@protocol UserWiseStateDelegate
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStop;
+@end
+
+
+@interface CampaignsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onStop;
+@end
+
 
 
 SWIFT_CLASS_NAMED("DatetimeVariable")
@@ -257,15 +295,6 @@ SWIFT_CLASS("_TtC11UserWiseSDK12EventsModule")
 
 
 
-SWIFT_PROTOCOL_NAMED("UserWiseStateDelegate")
-@protocol UserWiseStateDelegate
-- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
-- (void)onSessionInitializationAttemptFailed;
-- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
-- (void)onStop;
-@end
-
-
 @interface EventsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
 - (void)onSessionInitializationAttemptFailed;
 - (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
@@ -284,8 +313,8 @@ SWIFT_CLASS_NAMED("FileVariable")
 
 SWIFT_CLASS_NAMED("FloatVariable")
 @interface FloatVariable : Variable
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(float)defaultValue OBJC_DESIGNATED_INITIALIZER;
-- (float)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(double)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (double)getValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
 
@@ -470,6 +499,67 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 @end
 
 
+SWIFT_CLASS_NAMED("PlayerAttribute")
+@interface PlayerAttribute : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class PlayerEventAttribute;
+
+SWIFT_CLASS_NAMED("PlayerEvent")
+@interface PlayerEvent : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull eventId;
+@property (nonatomic, readonly, copy) NSArray<PlayerEventAttribute *> * _Nonnull attributes;
+- (nonnull instancetype)initWithEventId:(NSString * _Nonnull)eventId attributes:(NSArray<PlayerEventAttribute *> * _Nonnull)attributes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("PlayerEventAttribute")
+@interface PlayerEventAttribute : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class RegionMetadata;
+
+SWIFT_CLASS_NAMED("Region")
+@interface Region : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull eventId;
+@property (nonatomic, readonly, copy) NSArray<RegionMetadata *> * _Nonnull attributes;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name metadata:(NSArray<RegionMetadata *> * _Nonnull)metadata OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("RegionMetadata")
+@interface RegionMetadata : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -555,13 +645,13 @@ SWIFT_CLASS_NAMED("SurveysModule")
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
-@property (nonatomic, copy) NSArray<id <UserWiseStateDelegate>> * _Nonnull stateDelegates;
+@property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
-@property (nonatomic, readonly) BOOL isRunning;
+@property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
@@ -570,13 +660,16 @@ SWIFT_CLASS_NAMED("UserWise")
 - (UserWise * _Nonnull)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId SWIFT_WARN_UNUSED_RESULT;
 - (void)onStart;
 - (void)onStop;
+- (void)addStateDelegate:(id <UserWiseStateDelegate> _Nonnull)stateDelegate;
+- (void)removeStateDelegate:(id <UserWiseStateDelegate> _Nonnull)stateDelegate;
 - (BOOL)isSessionInitialized SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isAnyContentActive SWIFT_WARN_UNUSED_RESULT;
 - (void)getMediaWithMediaId:(NSString * _Nonnull)mediaId handler:(id <UserWiseMediaInfoDelegate> _Nonnull)handler;
 - (void)loadBitMapFromMediaId:(NSString * _Nonnull)mediaId ignoreCache:(BOOL)ignoreCache handler:(id <UserWiseMediaRawDataHandler> _Nonnull)handler;
 - (void)loadBitMapFromUrl:(NSString * _Nonnull)url ignoreCache:(BOOL)ignoreCache handler:(id <UserWiseMediaRawDataHandler> _Nonnull)handler;
-- (void)assignEvent:(NSString * _Nonnull)eventName attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
-- (void)setAttributes:(NSDictionary<NSString *, id> * _Nonnull)attributes;
+- (UserWise * _Nonnull)assignEvent:(PlayerEvent * _Nonnull)event callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (UserWise * _Nonnull)setAttributes:(NSArray<PlayerAttribute *> * _Nonnull)attributes callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (UserWise * _Nonnull)transitionToRegion:(Region * _Nonnull)region callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -695,6 +788,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, VariableType, "VariableType", open) {
 SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
 @interface VariablesModule : NSObject
 @property (nonatomic, strong) id <UserWiseVariablesDelegate> _Nullable variablesDelegate;
+- (NSArray<Variable *> * _Nonnull)getAllVariableDefinitions SWIFT_WARN_UNUSED_RESULT;
 - (Variable * _Nullable)getVariableDefinitionWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)defineWithVariables:(NSArray<Variable *> * _Nonnull)variables error:(NSError * _Nullable * _Nullable)error;
 - (Variable * _Nullable)defineVariableWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
@@ -930,6 +1024,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+/// Enumeration of possible UserWise data types that can be used for attributable actions;
+/// (e.g. player attribute updates, new player events, or transitioning to a new region).
+typedef SWIFT_ENUM_NAMED(NSInteger, AttributableDataType, "AttributableDataType", open) {
+  AttributableDataTypeString = 0,
+  AttributableDataTypeInteger = 1,
+  AttributableDataTypeFloat = 2,
+  AttributableDataTypeDatetime = 3,
+  AttributableDataTypeBoolean = 4,
+  AttributableDataTypeFile = 5,
+};
+
 enum VariableType : NSInteger;
 
 SWIFT_CLASS_NAMED("Variable")
@@ -950,6 +1055,33 @@ SWIFT_CLASS_NAMED("BooleanVariable")
 - (BOOL)getValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
+
+
+/// EventsModule
+/// Central interface used when working with UserWise events.
+SWIFT_CLASS("_TtC11UserWiseSDK15CampaignsModule")
+@interface CampaignsModule : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseStateDelegate")
+@protocol UserWiseStateDelegate
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStop;
+@end
+
+
+@interface CampaignsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onStop;
+@end
+
 
 
 SWIFT_CLASS_NAMED("DatetimeVariable")
@@ -977,15 +1109,6 @@ SWIFT_CLASS("_TtC11UserWiseSDK12EventsModule")
 
 
 
-SWIFT_PROTOCOL_NAMED("UserWiseStateDelegate")
-@protocol UserWiseStateDelegate
-- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
-- (void)onSessionInitializationAttemptFailed;
-- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
-- (void)onStop;
-@end
-
-
 @interface EventsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
 - (void)onSessionInitializationAttemptFailed;
 - (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
@@ -1004,8 +1127,8 @@ SWIFT_CLASS_NAMED("FileVariable")
 
 SWIFT_CLASS_NAMED("FloatVariable")
 @interface FloatVariable : Variable
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(float)defaultValue OBJC_DESIGNATED_INITIALIZER;
-- (float)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(double)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (double)getValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
 
@@ -1190,6 +1313,67 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 @end
 
 
+SWIFT_CLASS_NAMED("PlayerAttribute")
+@interface PlayerAttribute : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class PlayerEventAttribute;
+
+SWIFT_CLASS_NAMED("PlayerEvent")
+@interface PlayerEvent : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull eventId;
+@property (nonatomic, readonly, copy) NSArray<PlayerEventAttribute *> * _Nonnull attributes;
+- (nonnull instancetype)initWithEventId:(NSString * _Nonnull)eventId attributes:(NSArray<PlayerEventAttribute *> * _Nonnull)attributes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("PlayerEventAttribute")
+@interface PlayerEventAttribute : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class RegionMetadata;
+
+SWIFT_CLASS_NAMED("Region")
+@interface Region : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull eventId;
+@property (nonatomic, readonly, copy) NSArray<RegionMetadata *> * _Nonnull attributes;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name metadata:(NSArray<RegionMetadata *> * _Nonnull)metadata OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("RegionMetadata")
+@interface RegionMetadata : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -1275,13 +1459,13 @@ SWIFT_CLASS_NAMED("SurveysModule")
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
-@property (nonatomic, copy) NSArray<id <UserWiseStateDelegate>> * _Nonnull stateDelegates;
+@property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
-@property (nonatomic, readonly) BOOL isRunning;
+@property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
@@ -1290,13 +1474,16 @@ SWIFT_CLASS_NAMED("UserWise")
 - (UserWise * _Nonnull)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId SWIFT_WARN_UNUSED_RESULT;
 - (void)onStart;
 - (void)onStop;
+- (void)addStateDelegate:(id <UserWiseStateDelegate> _Nonnull)stateDelegate;
+- (void)removeStateDelegate:(id <UserWiseStateDelegate> _Nonnull)stateDelegate;
 - (BOOL)isSessionInitialized SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isAnyContentActive SWIFT_WARN_UNUSED_RESULT;
 - (void)getMediaWithMediaId:(NSString * _Nonnull)mediaId handler:(id <UserWiseMediaInfoDelegate> _Nonnull)handler;
 - (void)loadBitMapFromMediaId:(NSString * _Nonnull)mediaId ignoreCache:(BOOL)ignoreCache handler:(id <UserWiseMediaRawDataHandler> _Nonnull)handler;
 - (void)loadBitMapFromUrl:(NSString * _Nonnull)url ignoreCache:(BOOL)ignoreCache handler:(id <UserWiseMediaRawDataHandler> _Nonnull)handler;
-- (void)assignEvent:(NSString * _Nonnull)eventName attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
-- (void)setAttributes:(NSDictionary<NSString *, id> * _Nonnull)attributes;
+- (UserWise * _Nonnull)assignEvent:(PlayerEvent * _Nonnull)event callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (UserWise * _Nonnull)setAttributes:(NSArray<PlayerAttribute *> * _Nonnull)attributes callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (UserWise * _Nonnull)transitionToRegion:(Region * _Nonnull)region callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1415,6 +1602,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, VariableType, "VariableType", open) {
 SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
 @interface VariablesModule : NSObject
 @property (nonatomic, strong) id <UserWiseVariablesDelegate> _Nullable variablesDelegate;
+- (NSArray<Variable *> * _Nonnull)getAllVariableDefinitions SWIFT_WARN_UNUSED_RESULT;
 - (Variable * _Nullable)getVariableDefinitionWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)defineWithVariables:(NSArray<Variable *> * _Nonnull)variables error:(NSError * _Nullable * _Nullable)error;
 - (Variable * _Nullable)defineVariableWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
@@ -1650,6 +1838,17 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+/// Enumeration of possible UserWise data types that can be used for attributable actions;
+/// (e.g. player attribute updates, new player events, or transitioning to a new region).
+typedef SWIFT_ENUM_NAMED(NSInteger, AttributableDataType, "AttributableDataType", open) {
+  AttributableDataTypeString = 0,
+  AttributableDataTypeInteger = 1,
+  AttributableDataTypeFloat = 2,
+  AttributableDataTypeDatetime = 3,
+  AttributableDataTypeBoolean = 4,
+  AttributableDataTypeFile = 5,
+};
+
 enum VariableType : NSInteger;
 
 SWIFT_CLASS_NAMED("Variable")
@@ -1670,6 +1869,33 @@ SWIFT_CLASS_NAMED("BooleanVariable")
 - (BOOL)getValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
+
+
+/// EventsModule
+/// Central interface used when working with UserWise events.
+SWIFT_CLASS("_TtC11UserWiseSDK15CampaignsModule")
+@interface CampaignsModule : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseStateDelegate")
+@protocol UserWiseStateDelegate
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStop;
+@end
+
+
+@interface CampaignsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onStop;
+@end
+
 
 
 SWIFT_CLASS_NAMED("DatetimeVariable")
@@ -1697,15 +1923,6 @@ SWIFT_CLASS("_TtC11UserWiseSDK12EventsModule")
 
 
 
-SWIFT_PROTOCOL_NAMED("UserWiseStateDelegate")
-@protocol UserWiseStateDelegate
-- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
-- (void)onSessionInitializationAttemptFailed;
-- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
-- (void)onStop;
-@end
-
-
 @interface EventsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
 - (void)onSessionInitializationAttemptFailed;
 - (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
@@ -1724,8 +1941,8 @@ SWIFT_CLASS_NAMED("FileVariable")
 
 SWIFT_CLASS_NAMED("FloatVariable")
 @interface FloatVariable : Variable
-- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(float)defaultValue OBJC_DESIGNATED_INITIALIZER;
-- (float)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(double)defaultValue OBJC_DESIGNATED_INITIALIZER;
+- (double)getValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue SWIFT_UNAVAILABLE;
 @end
 
@@ -1910,6 +2127,67 @@ SWIFT_CLASS("_TtC11UserWiseSDK12OffersModule")
 @end
 
 
+SWIFT_CLASS_NAMED("PlayerAttribute")
+@interface PlayerAttribute : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class PlayerEventAttribute;
+
+SWIFT_CLASS_NAMED("PlayerEvent")
+@interface PlayerEvent : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull eventId;
+@property (nonatomic, readonly, copy) NSArray<PlayerEventAttribute *> * _Nonnull attributes;
+- (nonnull instancetype)initWithEventId:(NSString * _Nonnull)eventId attributes:(NSArray<PlayerEventAttribute *> * _Nonnull)attributes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("PlayerEventAttribute")
+@interface PlayerEventAttribute : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class RegionMetadata;
+
+SWIFT_CLASS_NAMED("Region")
+@interface Region : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull eventId;
+@property (nonatomic, readonly, copy) NSArray<RegionMetadata *> * _Nonnull attributes;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name metadata:(NSArray<RegionMetadata *> * _Nonnull)metadata OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("RegionMetadata")
+@interface RegionMetadata : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) enum AttributableDataType dataType;
+- (nonnull instancetype)initWithName:(NSString * _Nonnull)name dataType:(enum AttributableDataType)dataType value:(id _Nullable)value OBJC_DESIGNATED_INITIALIZER;
+- (NSString * _Nonnull)getName SWIFT_WARN_UNUSED_RESULT;
+- (enum AttributableDataType)getDataType SWIFT_WARN_UNUSED_RESULT;
+- (id _Nullable)getValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -1995,13 +2273,13 @@ SWIFT_CLASS_NAMED("SurveysModule")
 SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
-@property (nonatomic, copy) NSArray<id <UserWiseStateDelegate>> * _Nonnull stateDelegates;
+@property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
-@property (nonatomic, readonly) BOOL isRunning;
+@property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
@@ -2010,13 +2288,16 @@ SWIFT_CLASS_NAMED("UserWise")
 - (UserWise * _Nonnull)initializeWithApiKey:(NSString * _Nonnull)apiKey userId:(NSString * _Nonnull)userId SWIFT_WARN_UNUSED_RESULT;
 - (void)onStart;
 - (void)onStop;
+- (void)addStateDelegate:(id <UserWiseStateDelegate> _Nonnull)stateDelegate;
+- (void)removeStateDelegate:(id <UserWiseStateDelegate> _Nonnull)stateDelegate;
 - (BOOL)isSessionInitialized SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)isAnyContentActive SWIFT_WARN_UNUSED_RESULT;
 - (void)getMediaWithMediaId:(NSString * _Nonnull)mediaId handler:(id <UserWiseMediaInfoDelegate> _Nonnull)handler;
 - (void)loadBitMapFromMediaId:(NSString * _Nonnull)mediaId ignoreCache:(BOOL)ignoreCache handler:(id <UserWiseMediaRawDataHandler> _Nonnull)handler;
 - (void)loadBitMapFromUrl:(NSString * _Nonnull)url ignoreCache:(BOOL)ignoreCache handler:(id <UserWiseMediaRawDataHandler> _Nonnull)handler;
-- (void)assignEvent:(NSString * _Nonnull)eventName attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
-- (void)setAttributes:(NSDictionary<NSString *, id> * _Nonnull)attributes;
+- (UserWise * _Nonnull)assignEvent:(PlayerEvent * _Nonnull)event callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (UserWise * _Nonnull)setAttributes:(NSArray<PlayerAttribute *> * _Nonnull)attributes callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (UserWise * _Nonnull)transitionToRegion:(Region * _Nonnull)region callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -2135,6 +2416,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, VariableType, "VariableType", open) {
 SWIFT_CLASS("_TtC11UserWiseSDK15VariablesModule")
 @interface VariablesModule : NSObject
 @property (nonatomic, strong) id <UserWiseVariablesDelegate> _Nullable variablesDelegate;
+- (NSArray<Variable *> * _Nonnull)getAllVariableDefinitions SWIFT_WARN_UNUSED_RESULT;
 - (Variable * _Nullable)getVariableDefinitionWithName:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)defineWithVariables:(NSArray<Variable *> * _Nonnull)variables error:(NSError * _Nullable * _Nullable)error;
 - (Variable * _Nullable)defineVariableWithName:(NSString * _Nonnull)name type:(enum VariableType)type defaultValue:(id _Nullable)defaultValue error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;

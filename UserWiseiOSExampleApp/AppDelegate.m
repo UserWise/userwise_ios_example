@@ -36,7 +36,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
         [self.userWise setHostOverride:[NSURL URLWithString:@"https://staging.userwise.io"]];
-        [self.userWise setApiKey:@"f1535363ad9ab340ebc9786337b0"];
+        [self.userWise setApiKey:@""];
     }
     
     // VariablesModule Configuration *must* be configured prior to calling onStart
@@ -47,26 +47,43 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.descriptionVar = [[StringVariable alloc] initWithName:@"description" defaultValue:@"My default description"];
     self.exchangeRateVar = [[FloatVariable alloc] initWithName:@"exchangeRate" defaultValue:0.0f];
     self.headerImageVar = [[FileVariable alloc] initWithName:@"headerImage"];
-
-    [self.userWise.variablesModule defineWithVariables:@[self.maxLevelVar, self.enableThingAVar, self.startThisThingAtVar, self.titleVar, self.descriptionVar, self.exchangeRateVar, self.headerImageVar] error:nil];
     
+    [self.userWise.variablesModule defineWithVariables:@[self.maxLevelVar, self.enableThingAVar, self.startThisThingAtVar, self.titleVar, self.descriptionVar, self.exchangeRateVar, self.headerImageVar] error:nil];
     self.userWise.variablesModule.variablesDelegate = self;
 
     // SurveysModule Configuration
     [self.userWise.surveysModule setSurveyDelegate:[ExampleSurveyDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
     // [self.userWise.surveysModule setColorsWithPrimaryColor:UIColor.purpleColor splashScreenBackgroundColor:UIColor.whiteColor];
     // [self.userWise setSplashScreenLogo:[UIImage imageNamed:@"herowars-logo"]];
-    
+
     // OffersModule Configuration
     [self.userWise.offersModule setOfferDelegate:[ExampleOfferDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
-    
+
     // MessagesModule Configuration
     [self.userWise.messagesModule setMessageDelegate:[ExampleMessageDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
 
-    // Finally, you can assign your app user attributes and events directly within the SDK!
-    //NSDictionary *attributes = @{@"current_coins": @10000, @"current_diamonds": @20};
-    //[self.userWise setAttributes:attributes];
-    //[self.userWise assignEvent:@"completed_tutorial" attributes:@{@"was_repeat_play": @NO}];
+    [self.userWise onStart];
+    
+    // Finally, you can assign your app user attributes and events, directly within the SDK!
+    [self performSelector:@selector(assignUserLoginData) withObject:nil afterDelay:5.0];
+}
+
+- (void)assignUserLoginData {
+    // Emit that a player event occurred
+    NSArray<PlayerEventAttribute *> *eventAttributes = @[
+        [[PlayerEventAttribute alloc] initWithName:@"new_player" dataType:AttributableDataTypeBoolean value:@NO]
+    ];
+
+    PlayerEvent *event = [[PlayerEvent alloc] initWithEventId:@"event_logged_in" attributes:eventAttributes];
+    [self.userWise assignEvent:event callback:nil];
+    
+    // Update player's attributes
+    NSArray<PlayerAttribute *> *attributes = @[
+        [[PlayerAttribute alloc] initWithName:@"coins" dataType:AttributableDataTypeInteger value:@1000],
+        [[PlayerAttribute alloc] initWithName:@"ltv" dataType:AttributableDataTypeFloat value:@100.24],
+        [[PlayerAttribute alloc] initWithName:@"season_spring_2021_passholder" dataType:AttributableDataTypeBoolean value:@NO]
+    ];
+    [self.userWise setAttributes:attributes callback:nil];
 }
 
 - (void)onVariablesLoadedFromCache:(BOOL)fromCache {

@@ -7,10 +7,11 @@ import CoreTelephony
 import Foundation
 import Swift
 import UIKit
+import UserNotifications
 import WebKit
 @objc(FloatVariable) public class FloatVariable : UserWiseSDK.Variable {
-  @objc public init(name: Swift.String, defaultValue: Swift.Float)
-  @objc public func getValue() -> Swift.Float
+  @objc public init(name: Swift.String, defaultValue: Swift.Double)
+  @objc public func getValue() -> Swift.Double
   @objc deinit
   @objc override public init(name: Swift.String, type: UserWiseSDK.VariableType, defaultValue: Any?)
 }
@@ -78,6 +79,7 @@ extension VariablesError : Foundation.LocalizedError {
 }
 @_hasMissingDesignatedInitializers @objc public class VariablesModule : ObjectiveC.NSObject {
   @objc(variablesDelegate) public var variablesDelegate: UserWiseSDK.UserWiseVariablesDelegate?
+  @objc public func getAllVariableDefinitions() -> [UserWiseSDK.Variable]
   @objc public func getVariableDefinition(name: Swift.String) -> UserWiseSDK.Variable?
   @objc public func define(variables: Swift.Array<UserWiseSDK.Variable>) throws
   @objc public func defineVariable(name: Swift.String, type: UserWiseSDK.VariableType, defaultValue: Any?) throws -> UserWiseSDK.Variable
@@ -92,9 +94,21 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
   @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
   @objc dynamic public func onStop()
 }
+@_hasMissingDesignatedInitializers @objc public class CampaignsModule : ObjectiveC.NSObject {
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension CampaignsModule : UserWiseSDK.UserWiseStateDelegate {
+  @objc dynamic public func onSessionInitializationAttemptFailed()
+  @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
+  @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
+  @objc dynamic public func onStop()
+}
 @_hasMissingDesignatedInitializers @objc(UserWise) public class UserWise : ObjectiveC.NSObject {
   @objc(sdkVersion) final public let sdkVersion: Swift.String
-  @objc(stateDelegates) public var stateDelegates: [UserWiseSDK.UserWiseStateDelegate]
+  @objc(isRunning) public var isRunning: Swift.Bool {
+    get
+  }
   @objc(surveysModule) public var surveysModule: UserWiseSDK.SurveysModule? {
     get
   }
@@ -110,7 +124,7 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
   @objc(eventsModule) public var eventsModule: UserWiseSDK.EventsModule? {
     get
   }
-  @objc(isRunning) public var isRunning: Swift.Bool {
+  @objc(campaignsModule) public var campaignsModule: UserWiseSDK.CampaignsModule? {
     get
   }
   @objc(hostOverride) public var hostOverride: Foundation.URL? {
@@ -133,13 +147,16 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
   @objc public func initialize(apiKey: Swift.String, userId: Swift.String) -> UserWiseSDK.UserWise
   @objc public func onStart()
   @objc public func onStop()
+  @objc public func addStateDelegate(_ stateDelegate: UserWiseSDK.UserWiseStateDelegate)
+  @objc public func removeStateDelegate(_ stateDelegate: UserWiseSDK.UserWiseStateDelegate)
   @objc public func isSessionInitialized() -> Swift.Bool
   @objc public func isAnyContentActive() -> Swift.Bool
   @objc public func getMedia(mediaId: Swift.String, handler: UserWiseSDK.UserWiseMediaInfoDelegate)
   @objc public func loadBitMapFrom(mediaId: Swift.String, ignoreCache: Swift.Bool, handler: UserWiseSDK.UserWiseMediaRawDataHandler)
   @objc public func loadBitMapFrom(url: Swift.String, ignoreCache: Swift.Bool, handler: UserWiseSDK.UserWiseMediaRawDataHandler)
-  @objc public func assignEvent(_ eventName: Swift.String, attributes: [Swift.String : Any]?)
-  @objc public func setAttributes(_ attributes: [Swift.String : Any])
+  @objc public func assignEvent(_ event: UserWiseSDK.PlayerEvent, callback: ((Swift.Bool) -> Swift.Void)?) -> UserWiseSDK.UserWise
+  @objc public func setAttributes(_ attributes: [UserWiseSDK.PlayerAttribute], callback: ((Swift.Bool) -> Swift.Void)?) -> UserWiseSDK.UserWise
+  @objc public func transitionToRegion(_ region: UserWiseSDK.Region, callback: ((Swift.Bool) -> Swift.Void)?) -> UserWiseSDK.UserWise
   @objc public static var sharedInstance: UserWiseSDK.UserWise
   @objc deinit
   @objc override dynamic public init()
@@ -191,9 +208,6 @@ extension VariablesModule : UserWiseSDK.UserWiseStateDelegate {
   required public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension UIDevice {
-  public static var modelName: Swift.String
-}
 @_inheritsConvenienceInitializers @objc public class OfferPopupController : UIKit.UIViewController {
   @objc public static func loadController(offerImpression: UserWiseSDK.OfferImpression?, offerUrl: Swift.String) -> UserWiseSDK.OfferPopupController
   @objc override dynamic public func loadView()
@@ -210,11 +224,31 @@ extension UIDevice {
   @objc deinit
   @objc override public init(name: Swift.String, type: UserWiseSDK.VariableType, defaultValue: Any?)
 }
-@objc(UserWiseStateDelegate) public protocol UserWiseStateDelegate {
+@objc(UserWiseStateDelegate) public protocol UserWiseStateDelegate : AnyObject {
   @objc func onStart(sessionInitialized: Swift.Bool)
   @objc func onSessionInitializationAttemptFailed()
   @objc func onSessionInitialized(sessionId: Swift.String)
   @objc func onStop()
+}
+@objc(PlayerEventAttribute) public class PlayerEventAttribute : ObjectiveC.NSObject, Swift.Encodable {
+  @objc(name) final public let name: Swift.String
+  @objc(dataType) final public let dataType: UserWiseSDK.AttributableDataType
+  final public let value: Any?
+  @objc public init(name: Swift.String, dataType: UserWiseSDK.AttributableDataType, value: Any?)
+  @objc public func getName() -> Swift.String
+  @objc public func getDataType() -> UserWiseSDK.AttributableDataType
+  @objc public func getValue() -> Any?
+  public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc(PlayerEvent) public class PlayerEvent : ObjectiveC.NSObject, Swift.Encodable {
+  @objc(eventId) final public let eventId: Swift.String
+  @objc(attributes) final public let attributes: [UserWiseSDK.PlayerEventAttribute]
+  @objc public init(eventId: Swift.String, attributes: [UserWiseSDK.PlayerEventAttribute])
+  public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+  @objc override dynamic public init()
 }
 @objc(OfferViewAttemptFailedReason) public enum OfferViewAttemptFailedReason : Swift.Int {
   case OfferAlreadyActive = 0
@@ -260,6 +294,26 @@ extension UIDevice {
   @objc public func getValue() -> Swift.Int
   @objc deinit
   @objc override public init(name: Swift.String, type: UserWiseSDK.VariableType, defaultValue: Any?)
+}
+@objc(RegionMetadata) public class RegionMetadata : ObjectiveC.NSObject, Swift.Encodable {
+  @objc(name) final public let name: Swift.String
+  @objc(dataType) final public let dataType: UserWiseSDK.AttributableDataType
+  final public let value: Any?
+  @objc public init(name: Swift.String, dataType: UserWiseSDK.AttributableDataType, value: Any?)
+  @objc public func getName() -> Swift.String
+  @objc public func getDataType() -> UserWiseSDK.AttributableDataType
+  @objc public func getValue() -> Any?
+  public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc(Region) public class Region : ObjectiveC.NSObject, Swift.Encodable {
+  @objc(eventId) final public let name: Swift.String
+  @objc(attributes) final public let metadata: [UserWiseSDK.RegionMetadata]
+  @objc public init(name: Swift.String, metadata: [UserWiseSDK.RegionMetadata])
+  public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+  @objc override dynamic public init()
 }
 @objc(StringVariable) public class StringVariable : UserWiseSDK.Variable {
   @objc public init(name: Swift.String, defaultValue: Swift.String?)
@@ -335,6 +389,19 @@ extension SurveysModule : UserWiseSDK.UserWiseStateDelegate {
   @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
   @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
   @objc dynamic public func onStop()
+}
+@objc(AttributableDataType) public enum AttributableDataType : Swift.Int, Swift.RawRepresentable, Swift.Codable {
+  case String = 0
+  case Integer = 1
+  case Float = 2
+  case Datetime = 3
+  case Boolean = 4
+  case File = 5
+  public typealias RawValue = Swift.String
+  public var rawValue: UserWiseSDK.AttributableDataType.RawValue {
+    get
+  }
+  public init?(rawValue: UserWiseSDK.AttributableDataType.RawValue)
 }
 @objc(VariableType) public enum VariableType : Swift.Int, Swift.RawRepresentable, Swift.Codable {
   case String = 0
@@ -427,6 +494,18 @@ extension SurveysModule : UserWiseSDK.UserWiseStateDelegate {
   @objc(landscapeImageId) final public let landscapeImageId: Swift.String
   @objc(additionalFields) final public let additionalFields: [Swift.String : Any]
   required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc(PlayerAttribute) public class PlayerAttribute : ObjectiveC.NSObject, Swift.Encodable {
+  @objc(name) final public let name: Swift.String
+  @objc(dataType) final public let dataType: UserWiseSDK.AttributableDataType
+  final public let value: Any?
+  @objc public init(name: Swift.String, dataType: UserWiseSDK.AttributableDataType, value: Any?)
+  @objc public func getName() -> Swift.String
+  @objc public func getDataType() -> UserWiseSDK.AttributableDataType
+  @objc public func getValue() -> Any?
   public func encode(to encoder: Swift.Encoder) throws
   @objc deinit
   @objc override dynamic public init()

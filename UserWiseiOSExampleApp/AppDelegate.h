@@ -23,8 +23,7 @@
 @property (strong, nonatomic) FloatVariable *exchangeRateVar;
 @property (strong, nonatomic) FileVariable *headerImageVar;
 
-- (void)askForIDFAPermissions;
 - (void)initializeUserWiseSDK;
-- (void)onVariablesInitialized;
+- (void)assignUserLoginData;
 @end
 

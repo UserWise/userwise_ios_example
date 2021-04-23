@@ -30,20 +30,23 @@
     }];
 }
 
-- (void)onSurveyEnteredWithResponseId:(NSString * _Nonnull)responseId {
-    [self.controller.view makeToast:@"Entering survey!"];
-}
-
-- (void)onSurveyClosedWithResponseId:(NSString * _Nonnull)responseId {
+- (void)onSurveyClosedWithSurvey:(Survey * _Nonnull)survey responseId:(NSString * _Nonnull)responseId {
     [self.controller.view makeToast:@"Survey has been closed!"];
 }
 
-- (void)onSurveyEnterFailedWithResponseId:(NSString * _Nonnull)responseId {
+
+- (void)onSurveyCompletedWithSurvey:(Survey * _Nonnull)survey responseId:(NSString * _Nonnull)responseId {
+    [self.controller.view makeToast:@"Survey was successfully completed!"];
+}
+
+
+- (void)onSurveyEnterFailedWithSurvey:(Survey * _Nonnull)survey responseId:(NSString * _Nonnull)responseId {
     [self.controller.view makeToast:@"Survey failed to load!"];
 }
 
-- (void)onSurveyCompletedWithResponseId:(NSString * _Nonnull)responseId {
-    [self.controller.view makeToast:@"Survey was successfully completed!"];
+
+- (void)onSurveyEnteredWithSurvey:(Survey * _Nonnull)survey responseId:(NSString * _Nonnull)responseId {
+    [self.controller.view makeToast:@"Entering survey!"];
 }
 
 @end
