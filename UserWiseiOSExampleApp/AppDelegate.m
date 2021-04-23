@@ -69,21 +69,28 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 }
 
 - (void)assignUserLoginData {
-    // Emit that a player event occurred
+    // You can assign PlayerEvents (w/ optional attributes)...
     NSArray<PlayerEventAttribute *> *eventAttributes = @[
         [[PlayerEventAttribute alloc] initWithName:@"new_player" dataType:AttributableDataTypeBoolean value:@NO]
     ];
-
     PlayerEvent *event = [[PlayerEvent alloc] initWithEventId:@"event_logged_in" attributes:eventAttributes];
     [self.userWise assignEvent:event callback:nil];
     
-    // Update player's attributes
+    // ...And, you can assign PlayerAttributes
     NSArray<PlayerAttribute *> *attributes = @[
         [[PlayerAttribute alloc] initWithName:@"coins" dataType:AttributableDataTypeInteger value:@1000],
         [[PlayerAttribute alloc] initWithName:@"ltv" dataType:AttributableDataTypeFloat value:@100.24],
         [[PlayerAttribute alloc] initWithName:@"season_spring_2021_passholder" dataType:AttributableDataTypeBoolean value:@NO]
     ];
     [self.userWise setAttributes:attributes callback:nil];
+
+    // ...Also, you can transition to various in-app regions
+    NSArray<RegionMetadata *> *regionMetadata = @[
+        [[RegionMetadata alloc] initWithName:@"team_one_power" dataType:AttributableDataTypeInteger value:@150],
+        [[RegionMetadata alloc] initWithName:@"team_two_power" dataType:AttributableDataTypeInteger value:@9001]
+    ];
+    Region *region = [[Region alloc] initWithName:@"team_battle" metadata:regionMetadata];
+    [self.userWise transitionToRegion:region callback:nil];
 }
 
 - (void)onVariablesLoadedFromCache:(BOOL)fromCache {
