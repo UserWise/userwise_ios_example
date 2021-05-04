@@ -10,9 +10,9 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #endif
 
-@import Firebase;
+#import "UserNotifications/UserNotifications.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UserWiseVariablesDelegate, FIRMessagingDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UserWiseVariablesDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UserWise *userWise;
