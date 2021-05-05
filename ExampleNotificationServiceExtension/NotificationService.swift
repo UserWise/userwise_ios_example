@@ -17,6 +17,7 @@ class NotificationService: UNNotificationServiceExtension {
 
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
+        
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         if let bestAttemptContent = bestAttemptContent {
             let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
@@ -27,7 +28,7 @@ class NotificationService: UNNotificationServiceExtension {
             userWise.setApiKey("f1535363ad9ab340ebc9786337b0")
             
             dump(bestAttemptContent.userInfo)
-            let imageId = bestAttemptContent.userInfo["imageId"] as? String
+            let imageId = bestAttemptContent.userInfo["image_id"] as? String
 
             if let imageId = imageId {
                 let handler = ExampleMediaDelegate(semaphore: semaphore, withContentHandler: contentHandler, bestAttemptContent: bestAttemptContent)

@@ -29,15 +29,15 @@
 		724E78091EF14CF600271C2F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724E78081EF14CF600271C2F /* SystemConfiguration.framework */; };
 		724E780B1EF14CFC00271C2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724E780A1EF14CFC00271C2F /* UIKit.framework */; };
 		724E780D1EF14D0300271C2F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724E780C1EF14D0300271C2F /* WebKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		B50271832641DD5D009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271812641DD5D009FD7F4 /* UserWiseSDK.xcframework */; };
-		B50271852641DD62009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271812641DD5D009FD7F4 /* UserWiseSDK.xcframework */; };
-		B50271862641DD62009FD7F4 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B50271812641DD5D009FD7F4 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B50271A02641E563009FD7F4 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EEBB2526275C9B003666CF /* UserNotifications.framework */; };
 		B50271A12641E563009FD7F4 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EEBBB3262F7254003666CF /* UserNotificationsUI.framework */; };
 		B50271A42641E564009FD7F4 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50271A32641E564009FD7F4 /* NotificationViewController.swift */; };
 		B50271A72641E564009FD7F4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B50271A52641E564009FD7F4 /* MainInterface.storyboard */; };
 		B50271AB2641E564009FD7F4 /* ExampleNotificationContentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B502719F2641E563009FD7F4 /* ExampleNotificationContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B50271AF2641E5DB009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271812641DD5D009FD7F4 /* UserWiseSDK.xcframework */; };
+		B50271B226423F7C009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271B026423F7C009FD7F4 /* UserWiseSDK.xcframework */; };
+		B50271B326423F7C009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271B026423F7C009FD7F4 /* UserWiseSDK.xcframework */; };
+		B50271B426423F7F009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271B026423F7C009FD7F4 /* UserWiseSDK.xcframework */; };
+		B50271B526423F7F009FD7F4 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B50271B026423F7C009FD7F4 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B5ACD65B26265164006ED502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5ACD65A26265164006ED502 /* GoogleService-Info.plist */; };
 		B5EEBB2626275C9B003666CF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EEBB2526275C9B003666CF /* UserNotifications.framework */; };
 		B5EEBBCC262F7A9A003666CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EEBBCB262F7A9A003666CF /* NotificationService.swift */; };
@@ -71,7 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B50271862641DD62009FD7F4 /* UserWiseSDK.xcframework in Embed Frameworks */,
+				B50271B526423F7F009FD7F4 /* UserWiseSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,11 +125,11 @@
 		724E78081EF14CF600271C2F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		724E780A1EF14CFC00271C2F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		724E780C1EF14D0300271C2F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		B50271812641DD5D009FD7F4 /* UserWiseSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserWiseSDK.xcframework; sourceTree = "<group>"; };
 		B502719F2641E563009FD7F4 /* ExampleNotificationContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ExampleNotificationContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50271A32641E564009FD7F4 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B50271A62641E564009FD7F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B50271A82641E564009FD7F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B50271B026423F7C009FD7F4 /* UserWiseSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserWiseSDK.xcframework; sourceTree = "<group>"; };
 		B5ACD65A26265164006ED502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5ACD65C2626516D006ED502 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		B5ACD65D26265175006ED502 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				724E78071EF14CEE00271C2F /* Security.framework in Frameworks */,
 				B5EEBB2626275C9B003666CF /* UserNotifications.framework in Frameworks */,
 				724E78051EF14CE800271C2F /* JavaScriptCore.framework in Frameworks */,
-				B50271852641DD62009FD7F4 /* UserWiseSDK.xcframework in Frameworks */,
+				B50271B426423F7F009FD7F4 /* UserWiseSDK.xcframework in Frameworks */,
 				724E78031EF14CDE00271C2F /* Foundation.framework in Frameworks */,
 				7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */,
 				724E78011EF14CD700271C2F /* CoreTelephony.framework in Frameworks */,
@@ -166,7 +166,7 @@
 			files = (
 				B50271A12641E563009FD7F4 /* UserNotificationsUI.framework in Frameworks */,
 				B50271A02641E563009FD7F4 /* UserNotifications.framework in Frameworks */,
-				B50271AF2641E5DB009FD7F4 /* UserWiseSDK.xcframework in Frameworks */,
+				B50271B326423F7C009FD7F4 /* UserWiseSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B50271832641DD5D009FD7F4 /* UserWiseSDK.xcframework in Frameworks */,
+				B50271B226423F7C009FD7F4 /* UserWiseSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				B5EEBB2526275C9B003666CF /* UserNotifications.framework */,
-				B50271812641DD5D009FD7F4 /* UserWiseSDK.xcframework */,
+				B50271B026423F7C009FD7F4 /* UserWiseSDK.xcframework */,
 				18809DB724C0A22D00798FA2 /* AppTrackingTransparency.framework */,
 				7239634E20273F7300702509 /* ExternalAccessory.framework */,
 				724E780C1EF14D0300271C2F /* WebKit.framework */,
