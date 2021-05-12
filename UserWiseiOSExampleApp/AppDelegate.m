@@ -35,8 +35,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
-        [self.userWise setHostOverride:[NSURL URLWithString:@"https://staging.userwise.io"]];
-        [self.userWise setApiKey:@""];
+        [self.userWise setHostOverride:[NSURL URLWithString:@"http://lvh.me:3000"]];
+        [self.userWise setApiKey:@"e57656c13e8eb14e190203f92d75"];
     }
     
     // VariablesModule Configuration *must* be configured prior to calling onStart
@@ -90,6 +90,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         [[RegionMetadata alloc] initWithName:@"team_two_power" dataType:AttributableDataTypeInteger value:@9001]
     ];
     Region *region = [[Region alloc] initWithName:@"team_battle" metadata:regionMetadata];
+    [self.userWise transitionToRegion:region callback:nil];
     [self.userWise transitionToRegion:region callback:nil];
 }
 
