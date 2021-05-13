@@ -32,7 +32,7 @@
     NSLog(@"Offer Portrait Image ID: %@", offerImpression.offer.portraitImageId);
     NSLog(@"Offer Landscape Image ID: %@", offerImpression.offer.landscapeImageId);
     NSLog(@"Offer Product ID: %@", offerImpression.offer.iOSProductId);
-    NSLog(@"Offer Cost: %.02f", offerImpression.offer.cost);
+    NSLog(@"Offer Cost: %.02lf", offerImpression.offer.cost);
     NSLog(@"Bundled Currencies: \n %@", offerImpression.offer.currencies);
     NSLog(@"Bundled Items: \n %@", offerImpression.offer.items);
 
