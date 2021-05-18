@@ -543,8 +543,7 @@ SWIFT_CLASS_NAMED("PlayerEventAttribute")
 /// Central interface used when working with UserWise messages
 SWIFT_CLASS_NAMED("PushNotificationsModule")
 @interface PushNotificationsModule : NSObject
-- (void)registerTokenWithToken:(NSString * _Nonnull)token;
-- (void)handleNotificationWithData:(NSDictionary * _Nonnull)data;
+- (void)setPushNotificationAsViewedWithPushNotificationId:(NSString * _Nonnull)pushNotificationId;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1376,8 +1375,7 @@ SWIFT_CLASS_NAMED("PlayerEventAttribute")
 /// Central interface used when working with UserWise messages
 SWIFT_CLASS_NAMED("PushNotificationsModule")
 @interface PushNotificationsModule : NSObject
-- (void)registerTokenWithToken:(NSString * _Nonnull)token;
-- (void)handleNotificationWithData:(NSDictionary * _Nonnull)data;
+- (void)setPushNotificationAsViewedWithPushNotificationId:(NSString * _Nonnull)pushNotificationId;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

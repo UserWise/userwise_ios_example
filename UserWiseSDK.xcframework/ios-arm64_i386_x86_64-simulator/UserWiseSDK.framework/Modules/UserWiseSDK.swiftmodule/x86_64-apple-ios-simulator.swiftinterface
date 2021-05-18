@@ -171,8 +171,7 @@ extension CampaignsModule : UserWiseSDK.UserWiseStateDelegate {
   @objc func onEventActive(event: UserWiseSDK.GameEvent)
 }
 @_hasMissingDesignatedInitializers @objc(PushNotificationsModule) public class PushNotificationsModule : ObjectiveC.NSObject {
-  @objc public func registerToken(token: Swift.String)
-  @objc public func handleNotification(data: [Swift.AnyHashable : Any])
+  @objc public func setPushNotificationAsViewed(pushNotificationId: Swift.String)
   @objc override dynamic public init()
   @objc deinit
 }
