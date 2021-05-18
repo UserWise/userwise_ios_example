@@ -95,6 +95,12 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     // Print full message.
     NSLog(@"%@", userInfo);
     
+    // Only increment badge if in background.
+    if(application.applicationState == UIApplicationStateBackground) {
+        NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: badge + 1];
+    }
+    
     completionHandler(UIBackgroundFetchResultNewData);
 }
 // [END receive_message]
@@ -152,6 +158,9 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [self initializeUserWiseSDK];
+    
+    // Clear app badge on start or resume.
+    UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
