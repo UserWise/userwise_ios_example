@@ -661,7 +661,6 @@ SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 - (void)initializeUserWise;
-@property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
@@ -1495,7 +1494,6 @@ SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 - (void)initializeUserWise;
-@property (nonatomic, readonly) BOOL isRunning;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
