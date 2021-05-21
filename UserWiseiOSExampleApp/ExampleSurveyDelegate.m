@@ -14,7 +14,23 @@
 }
 
 - (void)onSurveyAvailableWithSurvey:(Survey * _Nonnull)survey {
+    NSLog(@"%@", [NSString
+                  stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- Questions Count: %ldd",
+                  @"Survey Available:",
+                  survey.id,
+                  survey.name,
+                  survey.questionsCount]);
+
     [self.userWise.surveysModule initializeSurveyInviteWithSurvey:survey];
+}
+
+- (void)onSurveyUnavailableWithSurvey:(Survey * _Nonnull)survey {
+    NSLog(@"%@", [NSString
+                  stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- Questions Count: %ldd",
+                  @"Survey Unavailable:",
+                  survey.id,
+                  survey.name,
+                  survey.questionsCount]);
 }
 
 - (void)onSurveyInviteInitializedWithSurvey:(Survey * _Nonnull)survey wasInitialized:(BOOL)wasInitialized responseId:(NSString * _Nullable)responseId inviteId:(NSString * _Nullable)inviteId {

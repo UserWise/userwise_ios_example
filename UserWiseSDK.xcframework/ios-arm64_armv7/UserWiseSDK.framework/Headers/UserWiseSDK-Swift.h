@@ -287,7 +287,7 @@ SWIFT_CLASS_NAMED("DatetimeVariable")
 /// Central interface used when working with UserWise events.
 SWIFT_CLASS("_TtC11UserWiseSDK12EventsModule")
 @interface EventsModule : NSObject
-@property (nonatomic, strong) id <UserWiseEventDelegate> _Nullable offerDelegate;
+@property (nonatomic, strong) id <UserWiseEventDelegate> _Nullable eventDelegate;
 - (NSArray<GameEvent *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
 - (NSArray<GameEvent *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
 - (GameEvent * _Nullable)getEventById:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
@@ -330,9 +330,7 @@ SWIFT_CLASS_NAMED("GameEvent")
 @property (nonatomic, readonly, copy) NSString * _Nonnull externalId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull externalEventType;
 @property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull startAtTz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull endAtTz;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -375,9 +373,12 @@ SWIFT_CLASS_NAMED("Message")
 @property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull additionalFields;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 @protocol UserWiseMessageDelegate;
 
@@ -417,12 +418,11 @@ SWIFT_CLASS_NAMED("Offer")
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull currencies;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull items;
 @property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull startAtTz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull endAtTz;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 enum OfferImpressionState : NSInteger;
 
@@ -538,6 +538,16 @@ SWIFT_CLASS_NAMED("PlayerEventAttribute")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+/// PushNotificationsModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("PushNotificationsModule")
+@interface PushNotificationsModule : NSObject
+- (void)setPushNotificationAsViewedWithPushNotificationId:(NSString * _Nonnull)pushNotificationId;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class RegionMetadata;
 
 SWIFT_CLASS_NAMED("Region")
@@ -577,12 +587,11 @@ SWIFT_CLASS_NAMED("Survey")
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly) NSInteger questionsCount;
 @property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull startAtTz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull endAtTz;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 @class UIColor;
 @class UIImage;
@@ -650,10 +659,12 @@ SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 @property (nonatomic, readonly) BOOL isRunning;
+- (void)initializeUserWise;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
+@property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
@@ -674,6 +685,7 @@ SWIFT_CLASS_NAMED("UserWise")
 - (UserWise * _Nonnull)assignEvent:(PlayerEvent * _Nonnull)event callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)setAttributes:(NSArray<PlayerAttribute *> * _Nonnull)attributes callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)transitionToRegion:(Region * _Nonnull)region callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (void)registerDeviceToken:(NSString * _Nonnull)deviceToken;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -690,6 +702,8 @@ SWIFT_PROTOCOL_NAMED("UserWiseEventDelegate")
 /// Called when an event has been loaded and is active
 /// Likely:  Called when an event becomes active within the SDK
 - (void)onEventActiveWithEvent:(GameEvent * _Nonnull)event;
+/// Called when an event has been marked as invactive
+- (void)onEventInactiveWithEvent:(GameEvent * _Nonnull)event;
 @end
 
 
@@ -712,8 +726,10 @@ SWIFT_PROTOCOL_NAMED("UserWiseMessageDelegate")
 @protocol UserWiseMessageDelegate
 /// Called once message(s) have been loaded from either the API or local cache
 - (void)onMessagesLoadedFromCache:(BOOL)fromCache;
-/// Called when message(s) are available for the appuser.
+/// Called when a message is marked as available for the player
 - (void)onMessageAvailableWithMessage:(Message * _Nonnull)message;
+/// Called when a message is marked as unavailable for the player
+- (void)onMessageUnavailableWithMessage:(Message * _Nonnull)message;
 @end
 
 
@@ -722,10 +738,10 @@ SWIFT_PROTOCOL_NAMED("UserWiseMessageDelegate")
 SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 @protocol UserWiseOfferDelegate
 - (void)onOffersLoaded;
-/// Called after a poll attempt that returns <em>NO</em> available offers.
-- (void)onOfferUnavailable;
-/// Called after a poll attempt that returns an available offer.
+/// Called once an offer has been marked as available
 - (void)onOfferAvailableWithOffer:(Offer * _Nonnull)offer;
+/// Called once an offer is nolonger available
+- (void)onOfferUnavailableWithOffer:(Offer * _Nonnull)offer;
 /// Called when an offer impression initialization request fails.
 - (void)onOfferImpressionInitializationFailedWithOffer:(Offer * _Nonnull)offer;
 /// Called when an offer impression has been successfully initialized
@@ -745,8 +761,10 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 SWIFT_PROTOCOL_NAMED("UserWiseSurveyDelegate")
 @protocol UserWiseSurveyDelegate
 - (void)onSurveysLoaded;
-/// Called when survey(s) are available for the appuser.
+/// Called whenever a survey is marked as available for the player.
 - (void)onSurveyAvailableWithSurvey:(Survey * _Nonnull)survey;
+/// Called whenever a survey has been marked as unavailable for the player.
+- (void)onSurveyUnavailableWithSurvey:(Survey * _Nonnull)survey;
 /// Called when the survey invite initialization was processed.
 - (void)onSurveyInviteInitializedWithSurvey:(Survey * _Nonnull)survey wasInitialized:(BOOL)wasInitialized responseId:(NSString * _Nullable)responseId inviteId:(NSString * _Nullable)inviteId;
 /// Called when the app user is entering into our survey user flow.
@@ -777,6 +795,18 @@ SWIFT_CLASS_NAMED("UserWiseUtility")
 SWIFT_PROTOCOL_NAMED("UserWiseVariablesDelegate")
 @protocol UserWiseVariablesDelegate
 - (void)onVariablesLoadedFromCache:(BOOL)fromCache;
+@end
+
+
+
+SWIFT_CLASS_NAMED("VariableGroup")
+@interface VariableGroup : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull name;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -1106,7 +1136,7 @@ SWIFT_CLASS_NAMED("DatetimeVariable")
 /// Central interface used when working with UserWise events.
 SWIFT_CLASS("_TtC11UserWiseSDK12EventsModule")
 @interface EventsModule : NSObject
-@property (nonatomic, strong) id <UserWiseEventDelegate> _Nullable offerDelegate;
+@property (nonatomic, strong) id <UserWiseEventDelegate> _Nullable eventDelegate;
 - (NSArray<GameEvent *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
 - (NSArray<GameEvent *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
 - (GameEvent * _Nullable)getEventById:(NSString * _Nonnull)id SWIFT_WARN_UNUSED_RESULT;
@@ -1149,9 +1179,7 @@ SWIFT_CLASS_NAMED("GameEvent")
 @property (nonatomic, readonly, copy) NSString * _Nonnull externalId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull externalEventType;
 @property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull startAtTz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull endAtTz;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1194,9 +1222,12 @@ SWIFT_CLASS_NAMED("Message")
 @property (nonatomic, readonly, copy) NSString * _Nonnull portraitImageId;
 @property (nonatomic, readonly, copy) NSString * _Nonnull landscapeImageId;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull additionalFields;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 @protocol UserWiseMessageDelegate;
 
@@ -1236,12 +1267,11 @@ SWIFT_CLASS_NAMED("Offer")
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull currencies;
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, NSNumber *> * _Nonnull items;
 @property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull startAtTz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull endAtTz;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 enum OfferImpressionState : NSInteger;
 
@@ -1357,6 +1387,16 @@ SWIFT_CLASS_NAMED("PlayerEventAttribute")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+/// PushNotificationsModule
+/// Central interface used when working with UserWise messages
+SWIFT_CLASS_NAMED("PushNotificationsModule")
+@interface PushNotificationsModule : NSObject
+- (void)setPushNotificationAsViewedWithPushNotificationId:(NSString * _Nonnull)pushNotificationId;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class RegionMetadata;
 
 SWIFT_CLASS_NAMED("Region")
@@ -1396,12 +1436,11 @@ SWIFT_CLASS_NAMED("Survey")
 @property (nonatomic, readonly, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly) NSInteger questionsCount;
 @property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull startAtTz;
 @property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
-@property (nonatomic, readonly, copy) NSString * _Nonnull endAtTz;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
 
 @class UIColor;
 @class UIImage;
@@ -1469,10 +1508,12 @@ SWIFT_CLASS_NAMED("UserWise")
 @interface UserWise : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull sdkVersion;
 @property (nonatomic, readonly) BOOL isRunning;
+- (void)initializeUserWise;
 @property (nonatomic, readonly, strong) SurveysModule * _Nullable surveysModule;
 @property (nonatomic, readonly, strong) OffersModule * _Nullable offersModule;
 @property (nonatomic, readonly, strong) MessagesModule * _Nullable messagesModule;
 @property (nonatomic, readonly, strong) VariablesModule * _Nullable variablesModule;
+@property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
@@ -1493,6 +1534,7 @@ SWIFT_CLASS_NAMED("UserWise")
 - (UserWise * _Nonnull)assignEvent:(PlayerEvent * _Nonnull)event callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)setAttributes:(NSArray<PlayerAttribute *> * _Nonnull)attributes callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
 - (UserWise * _Nonnull)transitionToRegion:(Region * _Nonnull)region callback:(void (^ _Nullable)(BOOL))callback SWIFT_WARN_UNUSED_RESULT;
+- (void)registerDeviceToken:(NSString * _Nonnull)deviceToken;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) UserWise * _Nonnull sharedInstance;)
 + (UserWise * _Nonnull)sharedInstance SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1509,6 +1551,8 @@ SWIFT_PROTOCOL_NAMED("UserWiseEventDelegate")
 /// Called when an event has been loaded and is active
 /// Likely:  Called when an event becomes active within the SDK
 - (void)onEventActiveWithEvent:(GameEvent * _Nonnull)event;
+/// Called when an event has been marked as invactive
+- (void)onEventInactiveWithEvent:(GameEvent * _Nonnull)event;
 @end
 
 
@@ -1531,8 +1575,10 @@ SWIFT_PROTOCOL_NAMED("UserWiseMessageDelegate")
 @protocol UserWiseMessageDelegate
 /// Called once message(s) have been loaded from either the API or local cache
 - (void)onMessagesLoadedFromCache:(BOOL)fromCache;
-/// Called when message(s) are available for the appuser.
+/// Called when a message is marked as available for the player
 - (void)onMessageAvailableWithMessage:(Message * _Nonnull)message;
+/// Called when a message is marked as unavailable for the player
+- (void)onMessageUnavailableWithMessage:(Message * _Nonnull)message;
 @end
 
 
@@ -1541,10 +1587,10 @@ SWIFT_PROTOCOL_NAMED("UserWiseMessageDelegate")
 SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 @protocol UserWiseOfferDelegate
 - (void)onOffersLoaded;
-/// Called after a poll attempt that returns <em>NO</em> available offers.
-- (void)onOfferUnavailable;
-/// Called after a poll attempt that returns an available offer.
+/// Called once an offer has been marked as available
 - (void)onOfferAvailableWithOffer:(Offer * _Nonnull)offer;
+/// Called once an offer is nolonger available
+- (void)onOfferUnavailableWithOffer:(Offer * _Nonnull)offer;
 /// Called when an offer impression initialization request fails.
 - (void)onOfferImpressionInitializationFailedWithOffer:(Offer * _Nonnull)offer;
 /// Called when an offer impression has been successfully initialized
@@ -1564,8 +1610,10 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 SWIFT_PROTOCOL_NAMED("UserWiseSurveyDelegate")
 @protocol UserWiseSurveyDelegate
 - (void)onSurveysLoaded;
-/// Called when survey(s) are available for the appuser.
+/// Called whenever a survey is marked as available for the player.
 - (void)onSurveyAvailableWithSurvey:(Survey * _Nonnull)survey;
+/// Called whenever a survey has been marked as unavailable for the player.
+- (void)onSurveyUnavailableWithSurvey:(Survey * _Nonnull)survey;
 /// Called when the survey invite initialization was processed.
 - (void)onSurveyInviteInitializedWithSurvey:(Survey * _Nonnull)survey wasInitialized:(BOOL)wasInitialized responseId:(NSString * _Nullable)responseId inviteId:(NSString * _Nullable)inviteId;
 /// Called when the app user is entering into our survey user flow.
@@ -1596,6 +1644,18 @@ SWIFT_CLASS_NAMED("UserWiseUtility")
 SWIFT_PROTOCOL_NAMED("UserWiseVariablesDelegate")
 @protocol UserWiseVariablesDelegate
 - (void)onVariablesLoadedFromCache:(BOOL)fromCache;
+@end
+
+
+
+SWIFT_CLASS_NAMED("VariableGroup")
+@interface VariableGroup : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull name;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 

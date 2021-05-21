@@ -2,8 +2,8 @@
 #define ExampleMessageDelegate_h
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <UserWiseSDK/UserWiseSDK-Swift.h>
-#import "SurveyOfferViewController.h"
 
 @interface ExampleMessageDelegate : NSObject <UserWiseMessageDelegate>
 

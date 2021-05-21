@@ -35,8 +35,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
-        [self.userWise setHostOverride:[NSURL URLWithString:@"http://lvh.me:3000"]];
-        [self.userWise setApiKey:@"e57656c13e8eb14e190203f92d75"];
+        //[self.userWise setHostOverride:[NSURL URLWithString:@""]];
+        [self.userWise setApiKey:@""];
     }
     
     // VariablesModule Configuration *must* be configured prior to calling onStart
@@ -61,6 +61,9 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // MessagesModule Configuration
     [self.userWise.messagesModule setMessageDelegate:[ExampleMessageDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
+    
+    // EventsModule Configuration
+    [self.userWise.eventsModule setEventDelegate:[ExampleGameEventDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
 
     [self.userWise onStart];
     
@@ -90,7 +93,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         [[RegionMetadata alloc] initWithName:@"team_two_power" dataType:AttributableDataTypeInteger value:@9001]
     ];
     Region *region = [[Region alloc] initWithName:@"team_battle" metadata:regionMetadata];
-    [self.userWise transitionToRegion:region callback:nil];
     [self.userWise transitionToRegion:region callback:nil];
 }
 

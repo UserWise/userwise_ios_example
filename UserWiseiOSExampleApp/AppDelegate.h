@@ -4,6 +4,7 @@
 #import "ExampleSurveyDelegate.h"
 #import "ExampleOfferDelegate.h"
 #import "ExampleMessageDelegate.h"
+#import "ExampleGameEventDelegate.h"
 #import "FileHandler.h"
 
 #if __has_include(<AppTrackingTransparency/AppTrackingTransparency.h>)

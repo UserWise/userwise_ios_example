@@ -17,17 +17,22 @@
 
 - (void)onMessageAvailableWithMessage:(Message *)message {
     NSLog(@"%@", [NSString
-                  stringWithFormat: @"%@%@", @"Message is available! Initializing message with id ",
-                  message.id]);
-    
-    [self.controller.view makeToast:[NSString
-                                     stringWithFormat: @"%@%@%@%@%@%@%@%@", @"Title: ",
-                                     message.title, @" - Body: ",
-                                     message.body, @" - Portrait image: ",
-                                     message.portraitImageId, @" - Landscape image: ",
-                                     message.landscapeImageId]];
+                  stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- Additional Fields: %@",
+                  @"Message is available!",
+                  message.id,
+                  message.name,
+                  message.additionalFields]);
     
     [self.userWise.messagesModule setMessageAsViewedWithMessage:message];
+}
+
+- (void)onMessageUnavailableWithMessage:(Message *)message {
+    NSLog(@"%@", [NSString
+                  stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- Additional Fields: %@",
+                  @"Message is unavailable!",
+                  message.id,
+                  message.name,
+                  message.additionalFields]);
 }
 
 @end
