@@ -14,8 +14,6 @@
 		189364A22562DF2D00044B82 /* ExampleSurveyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */; };
 		189364A52562E2E200044B82 /* ExampleOfferDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 189364A42562E2E200044B82 /* ExampleOfferDelegate.m */; };
 		18C49F272656B9A20089AB78 /* ExampleGameEventDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C49F262656B8760089AB78 /* ExampleGameEventDelegate.m */; };
-		18CE373425F7DE9200BA1891 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; };
-		18CE373525F7DE9200BA1891 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18F2FEFD25CC6114005F456C /* ExampleMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F2FEFC25CC6114005F456C /* ExampleMessageDelegate.m */; };
 		7239634F20273F7300702509 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7239634E20273F7300702509 /* ExternalAccessory.framework */; };
 		724E77E61EF14C6500271C2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 724E77E51EF14C6500271C2F /* main.m */; };
@@ -41,12 +39,9 @@
 		B50271C526544CD5009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271C226544CD5009FD7F4 /* UserWiseSDK.xcframework */; };
 		B50271C626544CD8009FD7F4 /* UserWiseSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50271C226544CD5009FD7F4 /* UserWiseSDK.xcframework */; };
 		B50271C726544CD8009FD7F4 /* UserWiseSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B50271C226544CD5009FD7F4 /* UserWiseSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B5ACD65B26265164006ED502 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5ACD65A26265164006ED502 /* GoogleService-Info.plist */; };
 		B5EEBB2626275C9B003666CF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EEBB2526275C9B003666CF /* UserNotifications.framework */; };
 		B5EEBBCC262F7A9A003666CF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EEBBCB262F7A9A003666CF /* NotificationService.swift */; };
 		B5EEBBD0262F7A9A003666CF /* ExampleNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B5EEBBC9262F7A9A003666CF /* ExampleNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		B5EEBBD7262F7D91003666CF /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5EEBBD6262F7D91003666CF /* sample.jpg */; };
-		B5EEBBD9262F7D91003666CF /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5EEBBD6262F7D91003666CF /* sample.jpg */; };
 		B5EEBBDF262F7DCD003666CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724E77F01EF14C6500271C2F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +101,6 @@
 		189364A12562DF2D00044B82 /* ExampleSurveyDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleSurveyDelegate.m; sourceTree = "<group>"; };
 		189364A42562E2E200044B82 /* ExampleOfferDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleOfferDelegate.m; sourceTree = "<group>"; };
 		189364A62562E2F100044B82 /* ExampleOfferDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleOfferDelegate.h; sourceTree = "<group>"; };
-		18B8F2A125BF6ADA009DE6B3 /* UserWiseSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserWiseSDK.xcframework; sourceTree = "<group>"; };
 		18C49F252656B8680089AB78 /* ExampleGameEventDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleGameEventDelegate.h; sourceTree = "<group>"; };
 		18C49F262656B8760089AB78 /* ExampleGameEventDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleGameEventDelegate.m; sourceTree = "<group>"; };
 		18F2FEFB25CC6114005F456C /* ExampleMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleMessageDelegate.h; sourceTree = "<group>"; };
@@ -136,15 +130,11 @@
 		B50271A62641E564009FD7F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B50271A82641E564009FD7F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50271C226544CD5009FD7F4 /* UserWiseSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = UserWiseSDK.xcframework; sourceTree = "<group>"; };
-		B5ACD65A26265164006ED502 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B5ACD65C2626516D006ED502 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
-		B5ACD65D26265175006ED502 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		B5EEBB2526275C9B003666CF /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		B5EEBBB3262F7254003666CF /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		B5EEBBC9262F7A9A003666CF /* ExampleNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ExampleNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5EEBBCB262F7A9A003666CF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B5EEBBCD262F7A9A003666CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5EEBBD6262F7D91003666CF /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,10 +282,6 @@
 				724E77F51EF14C6500271C2F /* Info.plist */,
 				724E77E41EF14C6500271C2F /* Supporting Files */,
 				724E77F01EF14C6500271C2F /* Assets.xcassets */,
-				B5ACD65A26265164006ED502 /* GoogleService-Info.plist */,
-				B5ACD65C2626516D006ED502 /* Firebase.h */,
-				B5ACD65D26265175006ED502 /* module.modulemap */,
-				B5EEBBD6262F7D91003666CF /* sample.jpg */,
 			);
 			path = UserWiseiOSExampleApp;
 			sourceTree = "<group>";
@@ -350,9 +336,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		724E77E01EF14C6500271C2F /* UserWiseDemoAppTest */ = {
+		724E77E01EF14C6500271C2F /* UserWiseDemoAPP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 724E77F81EF14C6500271C2F /* Build configuration list for PBXNativeTarget "UserWiseDemoAppTest" */;
+			buildConfigurationList = 724E77F81EF14C6500271C2F /* Build configuration list for PBXNativeTarget "UserWiseDemoAPP" */;
 			buildPhases = (
 				724E77DD1EF14C6500271C2F /* Sources */,
 				724E77DE1EF14C6500271C2F /* Frameworks */,
@@ -366,7 +352,7 @@
 				B5EEBBCF262F7A9A003666CF /* PBXTargetDependency */,
 				B50271AA2641E564009FD7F4 /* PBXTargetDependency */,
 			);
-			name = UserWiseDemoAppTest;
+			name = UserWiseDemoAPP;
 			productName = TheoremReachiOSExampleApp;
 			productReference = 724E77E11EF14C6500271C2F /* UserWise Demo App.app */;
 			productType = "com.apple.product-type.application";
@@ -446,7 +432,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				724E77E01EF14C6500271C2F /* UserWiseDemoAppTest */,
+				724E77E01EF14C6500271C2F /* UserWiseDemoAPP */,
 				B5EEBBC8262F7A9A003666CF /* ExampleNotificationServiceExtension */,
 				B502719E2641E563009FD7F4 /* ExampleNotificationContentExtension */,
 			);
@@ -459,9 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				187D8E7B246B3123001F0B10 /* SurveyOfferView.xib in Resources */,
-				B5EEBBD7262F7D91003666CF /* sample.jpg in Resources */,
 				724E77F41EF14C6500271C2F /* LaunchScreen.storyboard in Resources */,
-				B5ACD65B26265164006ED502 /* GoogleService-Info.plist in Resources */,
 				724E77F11EF14C6500271C2F /* Assets.xcassets in Resources */,
 				724E77EF1EF14C6500271C2F /* Main.storyboard in Resources */,
 			);
@@ -480,7 +464,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5EEBBDF262F7DCD003666CF /* Assets.xcassets in Resources */,
-				B5EEBBD9262F7D91003666CF /* sample.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +838,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		724E77F81EF14C6500271C2F /* Build configuration list for PBXNativeTarget "UserWiseDemoAppTest" */ = {
+		724E77F81EF14C6500271C2F /* Build configuration list for PBXNativeTarget "UserWiseDemoAPP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				724E77F91EF14C6500271C2F /* Debug */,

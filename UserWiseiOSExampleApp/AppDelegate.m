@@ -18,6 +18,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"didFinishLaunchingWithOptions");
     
     self.userWise = [UserWise sharedInstance];
+    [self initializeUserWiseSDK];
     [self.userWise initializeUserWise];
     
     // Register for remote notifications. This shows a permission dialog on first run, to
@@ -172,7 +173,7 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 - (void)initializeUserWiseSDK {
     if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
-        //[self.userWise setHostOverride:[NSURL URLWithString:@""]];
+//        [self.userWise setHostOverride:[NSURL URLWithString:@""]];
         [self.userWise setApiKey:@""];
     }
     
