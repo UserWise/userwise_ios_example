@@ -11,17 +11,157 @@
 
 @implementation AppDelegate
 
+NSString *const kGCMMessageIDKey = @"gcm.message_id";
+
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"didFinishLaunchingWithOptions");
+    
+    self.userWise = [UserWise sharedInstance];
+    [self initializeUserWiseSDK];
+    [self.userWise initializeUserWise];
+    
+    // Register for remote notifications. This shows a permission dialog on first run, to
+    // show the dialog at a more appropriate time move this registration accordingly.
+    // [START register_for_notifications]
+    if ([UNUserNotificationCenter class] != nil) {
+        // iOS 10 or later
+        // For iOS 10 display notification (sent via APNS)
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert |
+        UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
+        [[UNUserNotificationCenter currentNotificationCenter]
+         requestAuthorizationWithOptions:authOptions
+         completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            // ...
+        }];
+    } else {
+        // iOS 10 notifications aren't available; fall back to iOS 8-9 notifications.
+        UIUserNotificationType allNotificationTypes =
+        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    // [END register_for_notifications]
+    
+    UNNotificationAction* enter = [UNNotificationAction
+                                   actionWithIdentifier:@"EnterAction"
+                                   title:@"Enter"
+                                   options:UNNotificationActionOptionForeground];
+    UNNotificationAction* snooze = [UNNotificationAction
+                                    actionWithIdentifier:@"SnoozeAction"
+                                    title:@"Snooze"
+                                    options:UNNotificationActionOptionForeground];
+    UNNotificationAction* dismiss = [UNNotificationAction
+                                     actionWithIdentifier:@"DismissAction"
+                                     title:@"Dismiss"
+                                     options:UNNotificationActionOptionDestructive];
+    UNNotificationCategory* category = [UNNotificationCategory
+                                        categoryWithIdentifier:@"CustomCategory"
+                                        actions:@[snooze, enter, dismiss]
+                                        intentIdentifiers:@[@""]
+                                        options:UNNotificationCategoryOptionCustomDismissAction];
+    
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+    [center setNotificationCategories:[NSSet setWithObjects:category, nil]];
+    
     return YES;
 }
-     
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"didReceiveRemoteNotification");
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+    }
+    // [END_EXCLUDE]
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+}
+
+// [START receive_message]
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"didReceiveRemoteNotification with completionHandler");
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+    }
+    // [END_EXCLUDE]
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+    
+    // Only increment badge if in background.
+    if(application.applicationState == UIApplicationStateBackground) {
+        NSInteger badge = [[UIApplication sharedApplication] applicationIconBadgeNumber];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber: badge + 1];
+    }
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+// [END receive_message]
+
+// [START ios_10_message_handling]
+// Receive displayed notifications for iOS 10 devices.
+// Handle incoming notification messages while app is in the foreground.
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSLog(@"willPresentNotification");
+    
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+    }
+    // [END_EXCLUDE]
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+    
+    // Change this to your preferred presentation option
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionAlert);
+}
+
+// Handle notification messages after display notification is tapped by the user.
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void(^)(void))completionHandler {
+    NSLog(@"didReceiveNotificationResponse");
+    
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+    
+    // Print message ID.
+    if (userInfo[kGCMMessageIDKey]) {
+        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+    }
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+    
+    if([[response actionIdentifier] isEqual:@"SnoozeAction"] || [[response actionIdentifier] isEqual:@"EnterAction"] ||
+       [[response actionIdentifier] isEqual:@"DismissAction"]) {
+        NSLog(@"Message ID: %@", [response actionIdentifier]);
+    }
+    
+    completionHandler();
+}
+// [END ios_10_message_handling]
+
 - (void)applicationWillResignActive:(UIApplication *)application {}
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
 - (void)applicationWillEnterForeground:(UIApplication *)application {}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [self initializeUserWiseSDK];
+    
+    // Clear app badge on start or resume.
+    UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -31,13 +171,12 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 }
 
 - (void)initializeUserWiseSDK {
-    self.userWise = [UserWise sharedInstance];
-    
     if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
-        //[self.userWise setHostOverride:[NSURL URLWithString:@""]];
+//        [self.userWise setHostOverride:[NSURL URLWithString:@""]];
         [self.userWise setApiKey:@""];
     }
+    
     
     // VariablesModule Configuration *must* be configured prior to calling onStart
     self.maxLevelVar = [[IntegerVariable alloc] initWithName:@"maxLevel" defaultValue:0];
@@ -50,7 +189,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [self.userWise.variablesModule defineWithVariables:@[self.maxLevelVar, self.enableThingAVar, self.startThisThingAtVar, self.titleVar, self.descriptionVar, self.exchangeRateVar, self.headerImageVar] error:nil];
     self.userWise.variablesModule.variablesDelegate = self;
-
+    
     // SurveysModule Configuration
     [self.userWise.surveysModule setSurveyDelegate:[ExampleSurveyDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
     // [self.userWise.surveysModule setColorsWithPrimaryColor:UIColor.purpleColor splashScreenBackgroundColor:UIColor.whiteColor];

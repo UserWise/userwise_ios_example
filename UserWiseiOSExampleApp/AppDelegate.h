@@ -11,7 +11,9 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #endif
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UserWiseVariablesDelegate>
+#import "UserNotifications/UserNotifications.h"
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UserWiseVariablesDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UserWise *userWise;
