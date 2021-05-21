@@ -14,11 +14,25 @@
 }
 
 - (void)onOfferAvailableWithOffer:(Offer *)offer {
-    NSLog(@"Offer available. offer_id=%@", offer.id);
+    NSLog(@"%@", [NSString
+                  stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- Bundle:\n   |- Currencies: %@\n   |- Items: %@",
+                  @"Offer Available:",
+                  offer.id,
+                  offer.name,
+                  offer.currencies,
+                  offer.items]);
     [self.userWise.offersModule initializeOfferImpressionWithOffer:offer];
 }
 
-- (void)onOfferUnavailable { NSLog(@"No offers available"); }
+- (void)onOfferUnavailableWithOffer:(Offer *)offer {
+    NSLog(@"%@", [NSString
+                  stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- Bundle:\n   |- Currencies: %@\n   |- Items: %@",
+                  @"Offer Unavailable:",
+                  offer.id,
+                  offer.name,
+                  offer.currencies,
+                  offer.items]);
+}
 
 - (void)onOfferImpressionInitializationFailedWithOffer:(Offer *)offer {
     NSLog(@"Offer impression initialized failed. offer_id=%@", offer.id);

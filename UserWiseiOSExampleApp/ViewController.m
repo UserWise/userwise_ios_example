@@ -4,7 +4,7 @@
 
 - (void)viewDidLoad {
     self.userWise = UserWise.sharedInstance;
-    self.userIdField.text = @"userwise-ios-demo-user-new";
+    self.userIdField.text = @"userwise-ios-demo-user";
     self.userWise.userId = self.userIdField.text;
     [self.userWise onStart];
 
