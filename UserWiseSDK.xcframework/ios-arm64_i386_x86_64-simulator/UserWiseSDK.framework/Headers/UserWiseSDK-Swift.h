@@ -573,6 +573,42 @@ SWIFT_CLASS_NAMED("RegionMetadata")
 @end
 
 
+SWIFT_CLASS_NAMED("RemoteConfig")
+@interface RemoteConfig : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull externalId;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull json;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@protocol UserWiseRemoteConfigDelegate;
+
+/// RemoteConfigsModulue
+/// Central interface used when working with UserWise remoteConfigs.
+SWIFT_CLASS("_TtC11UserWiseSDK19RemoteConfigsModule")
+@interface RemoteConfigsModule : NSObject
+@property (nonatomic, strong) id <UserWiseRemoteConfigDelegate> _Nullable remoteConfigDelegate;
+- (NSArray<RemoteConfig *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<RemoteConfig *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
+- (RemoteConfig * _Nullable)getRemoteConfigByExternalId:(NSString * _Nonnull)externalId SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface RemoteConfigsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onStop;
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -667,6 +703,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
+@property (nonatomic, readonly, strong) RemoteConfigsModule * _Nullable remoteConfigsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
@@ -754,6 +791,17 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 - (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called whent he offer WebView accept CTA has been tapped.
 - (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseRemoteConfigDelegate")
+@protocol UserWiseRemoteConfigDelegate
+/// Called once remote configuration(s) have been loaded from either the API or local cache
+- (void)onRemoteConfigsLoaded;
+/// Called when a remote configuration is marked as active for the player
+- (void)onRemoteConfigActiveWithRemoteConfig:(RemoteConfig * _Nonnull)remoteConfig;
+/// Called when a remote configuration is marked as inactive for the player
+- (void)onRemoteConfigInactiveWithRemoteConfig:(RemoteConfig * _Nonnull)remoteConfig;
 @end
 
 
@@ -1422,6 +1470,42 @@ SWIFT_CLASS_NAMED("RegionMetadata")
 @end
 
 
+SWIFT_CLASS_NAMED("RemoteConfig")
+@interface RemoteConfig : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull externalId;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull json;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@protocol UserWiseRemoteConfigDelegate;
+
+/// RemoteConfigsModulue
+/// Central interface used when working with UserWise remoteConfigs.
+SWIFT_CLASS("_TtC11UserWiseSDK19RemoteConfigsModule")
+@interface RemoteConfigsModule : NSObject
+@property (nonatomic, strong) id <UserWiseRemoteConfigDelegate> _Nullable remoteConfigDelegate;
+- (NSArray<RemoteConfig *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<RemoteConfig *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
+- (RemoteConfig * _Nullable)getRemoteConfigByExternalId:(NSString * _Nonnull)externalId SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface RemoteConfigsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onStop;
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -1516,6 +1600,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
+@property (nonatomic, readonly, strong) RemoteConfigsModule * _Nullable remoteConfigsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
@@ -1603,6 +1688,17 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 - (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called whent he offer WebView accept CTA has been tapped.
 - (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseRemoteConfigDelegate")
+@protocol UserWiseRemoteConfigDelegate
+/// Called once remote configuration(s) have been loaded from either the API or local cache
+- (void)onRemoteConfigsLoaded;
+/// Called when a remote configuration is marked as active for the player
+- (void)onRemoteConfigActiveWithRemoteConfig:(RemoteConfig * _Nonnull)remoteConfig;
+/// Called when a remote configuration is marked as inactive for the player
+- (void)onRemoteConfigInactiveWithRemoteConfig:(RemoteConfig * _Nonnull)remoteConfig;
 @end
 
 
@@ -2271,6 +2367,42 @@ SWIFT_CLASS_NAMED("RegionMetadata")
 @end
 
 
+SWIFT_CLASS_NAMED("RemoteConfig")
+@interface RemoteConfig : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull id;
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly, copy) NSString * _Nonnull externalId;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull json;
+@property (nonatomic, readonly, copy) NSDate * _Nullable startAt;
+@property (nonatomic, readonly, copy) NSDate * _Nullable endAt;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@protocol UserWiseRemoteConfigDelegate;
+
+/// RemoteConfigsModulue
+/// Central interface used when working with UserWise remoteConfigs.
+SWIFT_CLASS("_TtC11UserWiseSDK19RemoteConfigsModule")
+@interface RemoteConfigsModule : NSObject
+@property (nonatomic, strong) id <UserWiseRemoteConfigDelegate> _Nullable remoteConfigDelegate;
+- (NSArray<RemoteConfig *> * _Nonnull)getAllActive SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<RemoteConfig *> * _Nonnull)getAllUpcoming SWIFT_WARN_UNUSED_RESULT;
+- (RemoteConfig * _Nullable)getRemoteConfigByExternalId:(NSString * _Nonnull)externalId SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface RemoteConfigsModule (SWIFT_EXTENSION(UserWiseSDK)) <UserWiseStateDelegate>
+- (void)onSessionInitializationAttemptFailed;
+- (void)onSessionInitializedWithSessionId:(NSString * _Nonnull)sessionId;
+- (void)onStartWithSessionInitialized:(BOOL)sessionInitialized;
+- (void)onStop;
+@end
+
+
 SWIFT_CLASS_NAMED("StringVariable")
 @interface StringVariable : Variable
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name defaultValue:(NSString * _Nullable)defaultValue OBJC_DESIGNATED_INITIALIZER;
@@ -2365,6 +2497,7 @@ SWIFT_CLASS_NAMED("UserWise")
 @property (nonatomic, readonly, strong) PushNotificationsModule * _Nullable pushNotificationsModule;
 @property (nonatomic, readonly, strong) EventsModule * _Nullable eventsModule;
 @property (nonatomic, readonly, strong) CampaignsModule * _Nullable campaignsModule;
+@property (nonatomic, readonly, strong) RemoteConfigsModule * _Nullable remoteConfigsModule;
 @property (nonatomic, copy) NSURL * _Nullable hostOverride;
 @property (nonatomic) BOOL debugMode;
 - (void)setApiKey:(NSString * _Nonnull)apiKey;
@@ -2452,6 +2585,17 @@ SWIFT_PROTOCOL_NAMED("UserWiseOfferDelegate")
 - (void)onOfferDismissedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
 /// Called whent he offer WebView accept CTA has been tapped.
 - (void)onOfferAcceptedWithOfferImpression:(OfferImpression * _Nullable)offerImpression;
+@end
+
+
+SWIFT_PROTOCOL_NAMED("UserWiseRemoteConfigDelegate")
+@protocol UserWiseRemoteConfigDelegate
+/// Called once remote configuration(s) have been loaded from either the API or local cache
+- (void)onRemoteConfigsLoaded;
+/// Called when a remote configuration is marked as active for the player
+- (void)onRemoteConfigActiveWithRemoteConfig:(RemoteConfig * _Nonnull)remoteConfig;
+/// Called when a remote configuration is marked as inactive for the player
+- (void)onRemoteConfigInactiveWithRemoteConfig:(RemoteConfig * _Nonnull)remoteConfig;
 @end
 
 

@@ -35,8 +35,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     if (![self.userWise isRunning]) {
         [self.userWise setDebugMode:YES];
-        //[self.userWise setHostOverride:[NSURL URLWithString:@""]];
-        [self.userWise setApiKey:@""];
+        [self.userWise setHostOverride:[NSURL URLWithString:@"http://lvh.me:3000"]];
+        [self.userWise setApiKey:@"8b04e77363e49cba7d0a44a969a8"];
     }
     
     // VariablesModule Configuration *must* be configured prior to calling onStart
@@ -64,7 +64,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // EventsModule Configuration
     [self.userWise.eventsModule setEventDelegate:[ExampleGameEventDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
-
+    
+    // RemoteConfigsModule Configuration
+    [self.userWise.remoteConfigsModule setRemoteConfigDelegate:[ExampleRemoteConfigDelegate initWithController:[UIApplication sharedApplication].keyWindow.rootViewController andUserWise:self.userWise]];
+    
     [self.userWise onStart];
     
     // Finally, you can assign your app user attributes and events, directly within the SDK!

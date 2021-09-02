@@ -101,6 +101,9 @@ extension CampaignsModule : UserWiseSDK.UserWiseStateDelegate {
   @objc(campaignsModule) public var campaignsModule: UserWiseSDK.CampaignsModule? {
     get
   }
+  @objc(remoteConfigsModule) public var remoteConfigsModule: UserWiseSDK.RemoteConfigsModule? {
+    get
+  }
   @objc(hostOverride) public var hostOverride: Foundation.URL? {
     @objc get
     @objc set(value)
@@ -226,6 +229,11 @@ extension CampaignsModule : UserWiseSDK.UserWiseStateDelegate {
   @objc func onOfferDismissed(offerImpression: UserWiseSDK.OfferImpression?)
   @objc func onOfferAccepted(offerImpression: UserWiseSDK.OfferImpression?)
 }
+@objc(UserWiseRemoteConfigDelegate) public protocol UserWiseRemoteConfigDelegate {
+  @objc func onRemoteConfigsLoaded()
+  @objc func onRemoteConfigActive(remoteConfig: UserWiseSDK.RemoteConfig)
+  @objc func onRemoteConfigInactive(remoteConfig: UserWiseSDK.RemoteConfig)
+}
 @objc(UserWiseMediaRawDataHandler) public protocol UserWiseMediaRawDataHandler {
   @objc func onMediaDownloadSuccess(data: Foundation.Data)
   @objc func onMediaDownloadFailure()
@@ -324,6 +332,18 @@ extension EventsModule : UserWiseSDK.UserWiseStateDelegate {
   @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
   @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
   @objc dynamic public func onStop()
+}
+@objc(RemoteConfig) public class RemoteConfig : ObjectiveC.NSObject, Swift.Codable {
+  @objc(id) final public let id: Swift.String
+  @objc(name) final public let name: Swift.String
+  @objc(externalId) final public let externalId: Swift.String
+  @objc(json) final public let json: [Swift.String : Any]
+  @objc final public let startAt: Foundation.Date?
+  @objc final public let endAt: Foundation.Date?
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  @objc override dynamic public init()
+  @objc deinit
 }
 @objc(UserWiseVariablesDelegate) public protocol UserWiseVariablesDelegate {
   @objc func onVariablesLoaded(fromCache: Swift.Bool)
@@ -485,6 +505,20 @@ extension VariablesError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
+}
+@_hasMissingDesignatedInitializers @objc public class RemoteConfigsModule : ObjectiveC.NSObject {
+  @objc(remoteConfigDelegate) public var remoteConfigDelegate: UserWiseSDK.UserWiseRemoteConfigDelegate?
+  @objc public func getAllActive() -> Swift.Array<UserWiseSDK.RemoteConfig>
+  @objc public func getAllUpcoming() -> Swift.Array<UserWiseSDK.RemoteConfig>
+  @objc public func getRemoteConfigBy(externalId: Swift.String) -> UserWiseSDK.RemoteConfig?
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension RemoteConfigsModule : UserWiseSDK.UserWiseStateDelegate {
+  @objc dynamic public func onSessionInitializationAttemptFailed()
+  @objc dynamic public func onSessionInitialized(sessionId: Swift.String)
+  @objc dynamic public func onStart(sessionInitialized: Swift.Bool)
+  @objc dynamic public func onStop()
 }
 @objc(UserWiseMediaInfoDelegate) public protocol UserWiseMediaInfoDelegate {
   @objc func onSuccess(mediaInfo: UserWiseSDK.MediaInfo)
