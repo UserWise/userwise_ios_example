@@ -11,6 +11,15 @@
 
 - (void)onRemoteConfigsLoaded {
     NSLog(@"Remote configs have been loaded.");
+    
+    //RemoteConfig *remoteConfig = [[[UserWise sharedInstance] remoteConfigsModule] getRemoteConfigByExternalId:@"sandbox_map"];
+    //NSLog(@"%@", [NSString
+    //              stringWithFormat: @"%@\n|- ID: %@\n|- Name: %@\n|- External ID: %@\n|- JSON: %@",
+    //              @"Remote Config is available!",
+    //              remoteConfig.id,
+    //              remoteConfig.name,
+    //              remoteConfig.externalId,
+    //              remoteConfig.json]);
 }
 
 - (void)onRemoteConfigActiveWithRemoteConfig:(RemoteConfig *)remoteConfig {
