@@ -10,5 +10,12 @@ This repository hosts an example ios application running the latest UserWise SDK
 - [UserWise Unity SDK](https://github.com/UserWise/userwise_unity_example)
 
 ## Changelog (>v2.1.0)
+
+### v2.2.0
+
+- Added Remote Configuration content type support
+
+### v2.1.0
+
 - Added Push Notification support
 - Added Client-Side scheduling (starting/stopping) of in-game content
